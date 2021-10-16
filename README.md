@@ -1,6 +1,6 @@
-# vite-test
+# amplify-test
 
-my vite test.
+my amplify test.
 
 ---
 
