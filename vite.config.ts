@@ -1,0 +1,26 @@
+import { defineConfig } from 'vite'
+import reactRefresh from '@vitejs/plugin-react-refresh'
+import path from 'path'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [reactRefresh()],
+  base: '/',
+  resolve: {
+    alias: {
+      '@/': path.join(__dirname, './src/'),
+    },
+  },
+  server: {
+    port: 8080, //default 3000
+    // Configure custom proxy rules for the dev server.
+    proxy: {
+      // '/api': 'http://localhost:8000/api',
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
+})
