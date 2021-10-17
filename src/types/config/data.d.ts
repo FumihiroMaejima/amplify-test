@@ -1,5 +1,4 @@
-export interface IAppConfig {
-  [key: string]: string | string[] | NoticeData[]
+export type IAppConfig = {
   headerName: string
   headerContents: string[]
   noticeData: NoticeData[]
