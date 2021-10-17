@@ -1,39 +1,29 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
-import { ContentTexts } from '@/components/modules/about/ContentTexts'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
 import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
-import { PartsContentsBoard } from '@/components/parts/PartsContentsBoard'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import { TableContentsType } from '@/types'
 // import '@/assets/scss/index.scss'
+
+const tableData: TableContentsType[] = [
+  { label: '会社名', value: 'テスト株式会社' },
+  { label: '創業', value: '1950年' },
+  { label: '従業員数', value: '600人' },
+  { label: '電話番号', value: '123-456-7890' },
+]
 
 export const Sample: React.VFC = () => {
   return (
     <div className="page-container page-container__mx-auto">
-      <h1 className="page-header">About</h1>
+      <h1 className="page-header">Sample</h1>
 
-      {/* <PartsContentsBoard>
-        <PartsLabelHeader text="このWebサイトについて" color="blue" />
-      </PartsContentsBoard> */}
-
-      <PartsContentsBoard>
-        {/* <PartsLabelHeader text="このWebサイトについて" color="blue" /> */}
-        <ContentTexts />
-      </PartsContentsBoard>
+      <PartsLabelHeader text="Slot label header" color="blue" />
 
       <div className="">
-        <PartsLabelTable text="label header" color="blue" />
-        <p>Hello Home!</p>
+        <PartsLabelTable items={tableData} />
       </div>
 
-      <div className="">
-        <PartsLabelHeader text="label header" color="blue" />
-        <PartsContentsBoard>
-          <PartsLabelHeader text="Slot label header" color="blue" />
-        </PartsContentsBoard>
-        <p>Hello Home!</p>
-      </div>
       <div className="">
         <p>Hello Home!</p>
         <PartsMessageBoard>
