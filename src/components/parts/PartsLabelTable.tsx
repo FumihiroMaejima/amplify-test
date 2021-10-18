@@ -8,12 +8,14 @@ type Props = {
 export const PartsLabelTable: React.VFC<Props> = (props) => {
   return (
     <table className="parts-label-table parts-label-table__table-element">
-      {props.items.map((item) => (
-        <tr>
-          <th>{item.label}</th>
-          <td>{item.value}</td>
-        </tr>
-      ))}
+      <tbody>
+        {props.items.map((item, i) => (
+          <tr key={i}>
+            <th>{item.label}</th>
+            <td>{item.value}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   )
 }

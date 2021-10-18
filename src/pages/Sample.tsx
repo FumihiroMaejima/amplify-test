@@ -3,14 +3,29 @@ import { Link } from 'react-router-dom'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
 import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import {
+  PartsSimpleTable,
+  TableHeaderType,
+  SimpleTableDataType,
+} from '@/components/parts/PartsSimpleTable'
 import { TableContentsType } from '@/types'
-// import '@/assets/scss/index.scss'
 
 const tableData: TableContentsType[] = [
   { label: '会社名', value: 'テスト株式会社' },
   { label: '創業', value: '1950年' },
   { label: '従業員数', value: '600人' },
   { label: '電話番号', value: '123-456-7890' },
+]
+
+const simpleTableHeaderData: TableHeaderType[] = [
+  { label: 'label1' },
+  { label: 'label2' },
+  { label: 'label3' },
+]
+const simpleTableData: SimpleTableDataType[] = [
+  { label1: 'v1', label2: 'v2', label3: 'v3' },
+  { label1: 'v4', label2: 'v5', label3: 'v6' },
+  { label1: 'v7', label2: 'v8', label3: 'v9' },
 ]
 
 export const Sample: React.VFC = () => {
@@ -22,6 +37,13 @@ export const Sample: React.VFC = () => {
 
       <div className="m-xy2">
         <PartsLabelTable items={tableData} />
+      </div>
+
+      <div className="m-xy2">
+        <PartsSimpleTable
+          headers={simpleTableHeaderData}
+          items={simpleTableData}
+        />
       </div>
 
       <div className="">
