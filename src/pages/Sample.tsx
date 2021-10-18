@@ -20,7 +20,7 @@ export const Sample: React.VFC = () => {
 
       <PartsLabelHeader text="Slot label header" color="blue" />
 
-      <div className="">
+      <div className="m-xy2">
         <PartsLabelTable items={tableData} />
       </div>
 
