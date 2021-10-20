@@ -38,4 +38,12 @@ $parts-simple-heading-color-red: #ac291d;
   &__double {
     border-bottom: double 3px $parts-simple-heading-color-dark-grey;
   }
+
+  &__up-down {
+    border-bottom: double 3px $parts-simple-heading-color-dark-grey;
+    color: $parts-simple-heading-color-dark-grey;
+    padding: 0.5em 0; // tb, rl
+    border-top: solid 3px $parts-simple-heading-color-dark-grey;
+    border-bottom: solid 3px $parts-simple-heading-color-dark-grey;
+  }
 }
