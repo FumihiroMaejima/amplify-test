@@ -8,10 +8,11 @@ $parts-simple-table-default-contents-color: #eeeeee;
 $parts-simple-table-default-header-color: #e9faeb;
 
 // header-font-weight
-$parts-simple-table-default-header-font-weight: 400;
+$parts-simple-table-default-header-font-weight: 500;
 
 // border-color
-$parts-simple-table-default-border-color: #757575;
+// $parts-simple-table-default-border-color: #757575;
+$parts-simple-table-default-border-color: #aaaaaa;
 
 .parts-simple-table {
   &.parts-simple-table__table-element {
@@ -22,30 +23,34 @@ $parts-simple-table-default-border-color: #757575;
     border-spacing: 0;
     border: solid 1px $parts-simple-table-default-border-color;
     border-radius: 6px;
-	  -webkit-border-radius: 6px;
-	  -moz-border-radius: 6px;
 
-    th{
-      padding: 10px;
-      background: $parts-simple-table-default-header-color;
-      // border: solid 1px $parts-simple-table-default-border-color;
-      border-bottom: solid 1px $parts-simple-table-default-border-color;
+    thead th,
+    tbody th,
+    tbody td {
+      padding: .6em 3em;
+      border-bottom: 1px solid $parts-simple-table-default-border-color;
+    }
+    thead th {
+      background-color: #ddd;
       font-weight: $parts-simple-table-default-header-font-weight;
     }
-
-    td{
-      padding: 10px;
-      // border: solid 1px $parts-simple-table-default-border-color;
-      border-bottom: solid 1px $parts-simple-table-default-border-color;
-      /* &:not(last-child){
-        //border-bottom: none;
-        border-bottom: solid 1px $parts-simple-table-default-border-color;
-      } */
+    tbody th {
+      background-color: #eee;
+    }
+    tbody td {
+      &:not(:first-child) {
+        border-left: 1px solid $parts-simple-table-default-border-color;
+      }
+    }
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: none;
     }
 
-    thead th + th,
-    tbody td {
-      border-left: 1px solid #aaa;
+    thead tr:first-child th {
+      &:not(:first-child) {
+        border-left: 1px solid $parts-simple-table-default-border-color;
+      }
     }
 
     thead tr:first-child th:first-child {
