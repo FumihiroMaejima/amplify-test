@@ -34,7 +34,11 @@ export const Sample: React.VFC = () => {
     <div className="page-container page-container__mx-auto">
       <h1 className="page-header">Sample</h1>
 
-      <PartsSimpleHeading text="Slot label header" color="dark-grey" />
+      <PartsSimpleHeading
+        text="simple heading"
+        color="dark-grey"
+        isDashed={false}
+      />
 
       <PartsLabelHeader text="Slot label header" color="blue" />
 

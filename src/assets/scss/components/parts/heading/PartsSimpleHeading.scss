@@ -29,4 +29,9 @@ $parts-simple-heading-color-red: #ac291d;
   &__red {
     border-bottom: solid 3px $parts-simple-heading-color-red;
   }
+
+  &__dash {
+    color: $parts-simple-heading-color-dark-grey;
+    border-bottom: dashed $parts-simple-heading-color-dark-grey;
+  }
 }
