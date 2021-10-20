@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
 import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
   PartsSimpleTable,
   TableHeaderType,
@@ -32,6 +33,8 @@ export const Sample: React.VFC = () => {
   return (
     <div className="page-container page-container__mx-auto">
       <h1 className="page-header">Sample</h1>
+
+      <PartsSimpleHeading text="Slot label header" color="dark-grey" />
 
       <PartsLabelHeader text="Slot label header" color="blue" />
 
