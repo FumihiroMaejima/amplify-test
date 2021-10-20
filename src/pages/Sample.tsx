@@ -38,6 +38,7 @@ export const Sample: React.VFC = () => {
         text="simple heading"
         color="dark-grey"
         isDashed={false}
+        isDouble={false}
       />
 
       <PartsLabelHeader text="Slot label header" color="blue" />
