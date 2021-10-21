@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
 import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
   PartsSimpleTable,
@@ -41,6 +42,10 @@ export const Sample: React.VFC = () => {
         isDouble={false}
         isUpAndDown={false}
       />
+
+      <div className="m-xy2">
+        <PartsSimpleBox text="simple box" color="dark-grey" />
+      </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
 
