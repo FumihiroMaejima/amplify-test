@@ -5,6 +5,13 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
+  root: './src', // index.html path
+  build: {
+    target: 'esnext',
+    // root (= ./src) から見た相対パスで指定
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
   base: '/',
   resolve: {
     alias: {
@@ -12,6 +19,7 @@ export default defineConfig({
     },
   },
   server: {
+    open: true,
     port: 8080, //default 3000
     // Configure custom proxy rules for the dev server.
     proxy: {
