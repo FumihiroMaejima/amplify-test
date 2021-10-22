@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
-import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
+import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
 import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
@@ -9,7 +9,7 @@ import {
   PartsSimpleTable,
   TableHeaderType,
   SimpleTableDataType,
-} from '@/components/parts/PartsSimpleTable'
+} from '@/components/parts/table/PartsSimpleTable'
 import { TableContentsType } from '@/types'
 
 const tableData: TableContentsType[] = [

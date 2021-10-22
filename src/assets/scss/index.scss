@@ -6,12 +6,12 @@
 // parts
 @import './components/parts/PartsCircleLoading.scss';
 @import './components/parts/PartsLabelHeader.scss';
-@import './components/parts/PartsLabelTable.scss';
 @import './components/parts/PartsContentsBoard.scss';
 @import './components/parts/PartsMessageBoard.scss';
-@import './components/parts/PartsSimpleTable.scss';
 @import './components/parts/box/PartsSimpleBox.scss';
 @import './components/parts/heading/PartsSimpleHeading.scss';
+@import './components/parts/table/PartsLabelTable.scss';
+@import './components/parts/table/PartsSimpleTable.scss';
 
 /* util */
 @import './util/layout.scss';
