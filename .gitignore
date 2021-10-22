@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # cypress directory
 /cypress
+
+# cypress directory
+/public

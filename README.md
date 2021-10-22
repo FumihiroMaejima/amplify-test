@@ -350,7 +350,7 @@ module.exports = {
 まだ出来る様になっていない。
 
 ```Shell-session
-$ yarn add --dev jest
+$ yarn add --dev jest ts-jest @types/jest
 ```
 
 `package.json`の設定
@@ -384,6 +384,11 @@ module.exports = {
 
 ```
 
+`@testing-library/react`のインストール
+
+```Shell-session
+$ yarn add --dev @testing-library/react
+```
 
 
 ---
@@ -423,6 +428,16 @@ module.exports = {
 }
 ```
 
+production build の為に`skipLibCheck`は`true`を設定する。
+
+```Json
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+  }
+}
+```
+
 ---
 
 ## vite.config.tsの設定
@@ -441,13 +456,20 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
+  root: './src',
+  build: {
+    target: 'esnext',
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
   base: '/',
   resolve: {
     alias: {
-      '@/': path.join(__dirname, './src/')
-    }
+      '@/': path.join(__dirname, './src/'),
+    },
   },
   server: {
+    open: true,
     port: 8080, //default 3000
     // Configure custom proxy rules for the dev server.
     proxy: {

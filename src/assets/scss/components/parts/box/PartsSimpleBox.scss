@@ -1,0 +1,71 @@
+// label color
+$parts-simple-box-color-black: #000000;
+$parts-simple-box-color-dark-grey: #757575;
+$parts-simple-box-color-blue: #1565c0;
+$parts-simple-box-color-green: #006f5f;
+$parts-simple-box-color-red: #ac291d;
+
+.parts-simple-box {
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  font-weight: 400;
+  // color: #6091d3;
+  background: #ffffff;
+  // border: solid 3px #6091d3;
+  border-radius: 10px;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__black {
+    border: solid 3px $parts-simple-box-color-black;
+  }
+
+  &__dark-grey {
+    border: solid 3px $parts-simple-box-color-dark-grey;
+  }
+
+  &__blue {
+    border: solid 3px $parts-simple-box-color-blue;
+  }
+
+  &__green {
+    border: solid 3px $parts-simple-box-color-green;
+  }
+
+  &__red {
+    border: solid 3px $parts-simple-box-color-red;
+  }
+
+  &__dash {
+    border: dashed 2px $parts-simple-box-color-dark-grey;
+  }
+
+  &__double {
+    border: double 3px $parts-simple-box-color-dark-grey;
+  }
+
+  &__text {
+    &--black {
+      color: $parts-simple-box-color-black;;
+    }
+
+    &--dark-grey {
+      color: $parts-simple-box-color-dark-grey;;
+    }
+
+    &--blue {
+      color: $parts-simple-box-color-blue;;
+    }
+
+    &--green {
+      color: $parts-simple-box-color-green;;
+    }
+
+    &--red {
+      color: $parts-simple-box-color-red;;
+    }
+  }
+}

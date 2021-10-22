@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
-import { PartsLabelTable } from '@/components/parts/PartsLabelTable'
+import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
+import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
+import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
   PartsSimpleTable,
   TableHeaderType,
   SimpleTableDataType,
-} from '@/components/parts/PartsSimpleTable'
+} from '@/components/parts/table/PartsSimpleTable'
 import { TableContentsType } from '@/types'
 
 const tableData: TableContentsType[] = [
@@ -32,6 +35,25 @@ export const Sample: React.VFC = () => {
   return (
     <div className="page-container page-container__mx-auto">
       <h1 className="page-header">Sample</h1>
+
+      <PartsSimpleHeading
+        text="simple heading"
+        color="dark-grey"
+        isDashed={false}
+        isDouble={false}
+      />
+
+      <div className="m-xy2">
+        <PartsSimpleBox text="simple box" isDashed={false} />
+      </div>
+
+      <div className="m-xy2">
+        <PartsTitleBox text="title box" isDashed={false} />
+      </div>
+
+      <div className="m-xy2">
+        <PartsTitleBox text="title box" color="green" isDashed={true} />
+      </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
 
