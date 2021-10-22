@@ -10,9 +10,7 @@ $parts-title-box-color-red: #ac291d;
   padding: 0.5em 1em;
   margin: 1em 0;
   font-weight: 400;
-  // color: #6091d3;
   background: #ffffff;
-  // border: solid 3px #6091d3;
   border-radius: 10px;
 
   &__title {
@@ -22,9 +20,9 @@ $parts-title-box-color-red: #ac291d;
     left: 10px;
     padding: 0 9px;
     line-height: 1;
-    font-size: 19px;
+    font-size: 20px;
     background: #ffffff;
-    color: #95ccff;
+    // color: #95ccff;
     font-weight: 500;
 
     &-color {
