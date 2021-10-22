@@ -19,7 +19,7 @@ export const PartsSimpleBox: React.VFC<Props> = ({
   return (
     <div
       className={`parts-simple-box parts-simple-box__${color} parts-simple-box__text--${textColor}
-       ${isDashed ? 'parts-simple-box__dash' : ''}, ${
+       ${isDashed ? 'parts-simple-box__dash' : ''} ${
         isDouble ? 'parts-simple-box__double' : ''
       }
       `}

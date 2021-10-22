@@ -40,8 +40,7 @@ $parts-simple-box-color-red: #ac291d;
   }
 
   &__dash {
-    color: $parts-simple-box-color-dark-grey;
-    border: dashed $parts-simple-box-color-dark-grey;
+    border: dashed 2px $parts-simple-box-color-dark-grey;
   }
 
   &__double {

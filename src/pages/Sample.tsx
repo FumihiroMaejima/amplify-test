@@ -43,7 +43,7 @@ export const Sample: React.VFC = () => {
       />
 
       <div className="m-xy2">
-        <PartsSimpleBox text="simple box" />
+        <PartsSimpleBox text="simple box" isDashed={false} />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />

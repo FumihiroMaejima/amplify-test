@@ -20,7 +20,7 @@ export const PartsSimpleHeading: React.VFC<Props> = ({
     <h1
       className={`parts-simple-heading parts-simple-heading__${color} ${
         isDashed ? 'parts-simple-heading__dash' : ''
-      }, ${isDouble ? 'parts-simple-heading__double' : ''},
+      } ${isDouble ? 'parts-simple-heading__double' : ''}
       ${isUpAndDown ? 'parts-simple-heading__up-down' : ''}
       `}
     >
