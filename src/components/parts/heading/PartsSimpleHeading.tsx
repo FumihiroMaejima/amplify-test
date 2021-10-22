@@ -9,24 +9,22 @@ type Props = {
   isUpAndDown?: boolean
 }
 
-export const PartsSimpleHeading: React.VFC<Props> = (
-  props = {
-    text: '',
-    color: 'dark-grey',
-    isDashed: false,
-    isDouble: false,
-    isUpAndDown: false,
-  }
-) => {
+export const PartsSimpleHeading: React.VFC<Props> = ({
+  text = '',
+  color = 'dark-grey',
+  isDashed = false,
+  isDouble = false,
+  isUpAndDown = false,
+}) => {
   return (
     <h1
-      className={`parts-simple-heading parts-simple-heading__${props.color} ${
-        props.isDashed ? 'parts-simple-heading__dash' : ''
-      }, ${props.isDouble ? 'parts-simple-heading__double' : ''},
-      ${props.isUpAndDown ? 'parts-simple-heading__up-down' : ''}
+      className={`parts-simple-heading parts-simple-heading__${color} ${
+        isDashed ? 'parts-simple-heading__dash' : ''
+      }, ${isDouble ? 'parts-simple-heading__double' : ''},
+      ${isUpAndDown ? 'parts-simple-heading__up-down' : ''}
       `}
     >
-      {props.text}
+      {text}
     </h1>
   )
 }

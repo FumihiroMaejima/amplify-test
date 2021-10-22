@@ -9,26 +9,22 @@ type Props = {
   isDouble?: boolean
 }
 
-export const PartsSimpleBox: React.VFC<Props> = (
-  props = {
-    text: '',
-    color: 'dark-grey',
-    textColor: 'dark-grey',
-    isDashed: false,
-    isDouble: false,
-  }
-) => {
+export const PartsSimpleBox: React.VFC<Props> = ({
+  text = '',
+  color = 'dark-grey',
+  textColor = 'dark-grey',
+  isDashed = false,
+  isDouble = false,
+}) => {
   return (
     <div
-      className={`parts-simple-box parts-simple-box__${
-        props.color
-      } parts-simple-box__text--${props.textColor}
-       ${props.isDashed ? 'parts-simple-box__dash' : ''}, ${
-        props.isDouble ? 'parts-simple-box__double' : ''
+      className={`parts-simple-box parts-simple-box__${color} parts-simple-box__text--${textColor}
+       ${isDashed ? 'parts-simple-box__dash' : ''}, ${
+        isDouble ? 'parts-simple-box__double' : ''
       }
       `}
     >
-      <p>{props.text}</p>
+      <p>{text}</p>
     </div>
   )
 }

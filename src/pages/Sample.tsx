@@ -40,11 +40,10 @@ export const Sample: React.VFC = () => {
         color="dark-grey"
         isDashed={false}
         isDouble={false}
-        isUpAndDown={false}
       />
 
       <div className="m-xy2">
-        <PartsSimpleBox text="simple box" color="dark-grey" />
+        <PartsSimpleBox text="simple box" />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
