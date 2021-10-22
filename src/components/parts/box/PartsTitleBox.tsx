@@ -27,7 +27,7 @@ export const PartsTitleBox: React.VFC<Props> = ({
       `}
     >
       <span
-        className={`parts-title-box__title parts-title-box__title-color--${color}`}
+        className={`parts-title-box__title parts-title-box__title--over parts-title-box__title-color--${color}`}
       >
         {title}
       </span>
