@@ -4,6 +4,7 @@ import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
 import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
 import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
+import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
   PartsSimpleTable,
@@ -44,6 +45,10 @@ export const Sample: React.VFC = () => {
 
       <div className="m-xy2">
         <PartsSimpleBox text="simple box" isDashed={false} />
+      </div>
+
+      <div className="m-xy2">
+        <PartsTitleBox text="simple box" isDashed={false} />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
