@@ -193,4 +193,20 @@
       }
     }
   }
+
+  &-radius {
+    &__round {
+      &--5p {
+        border-radius: 5px;
+      }
+
+      &--8p {
+        border-radius: 8px;
+      }
+
+      &--10p {
+        border-radius: 10px;
+      }
+    }
+  }
 }
