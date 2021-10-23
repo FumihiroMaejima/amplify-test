@@ -87,26 +87,4 @@
   &__double {
     border: double 3px $util-color-dark-grey;
   }
-
-  &__text {
-    &--black {
-      color: $util-color-black;
-    }
-
-    &--dark-grey {
-      color: $util-color-dark-grey;
-    }
-
-    &--blue {
-      color: $util-color-blue;
-    }
-
-    &--green {
-      color: $util-color-green;
-    }
-
-    &--red {
-      color: $util-color-red;
-    }
-  }
 }

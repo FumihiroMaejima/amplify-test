@@ -48,11 +48,20 @@ export const Sample: React.VFC = () => {
       </div>
 
       <div className="m-xy2">
+        <PartsSimpleBox text="simple box" textColor="red" isDashed={false} />
+      </div>
+
+      <div className="m-xy2">
         <PartsTitleBox text="title box" isDashed={false} />
       </div>
 
       <div className="m-xy2">
-        <PartsTitleBox text="title box" color="green" isDashed={true} />
+        <PartsTitleBox
+          text="title box"
+          color="green"
+          textColor="blue"
+          isDashed={true}
+        />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
