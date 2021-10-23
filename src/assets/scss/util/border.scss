@@ -31,7 +31,7 @@
           }
 
           &--dash {
-            border: dashed 2px $util-color-dark-grey;
+            border: dashed $util-color-dark-grey;
           }
 
           &--double {
@@ -64,12 +64,36 @@
           }
 
           &--dash {
-            border: dashed 2px $util-color-dark-grey;
+            border: dashed $util-color-dark-grey;
           }
 
           &--double {
             border: double 3px $util-color-dark-grey;
           }
+        }
+      }
+    }
+
+    &-dash {
+      &__color {
+        &--black {
+          border: dashed $util-color-black;
+        }
+
+        &--dark-grey {
+          border: dashed $util-color-dark-grey;
+        }
+
+        &--blue {
+          border: dashed $util-color-blue;
+        }
+
+        &--green {
+          border: dashed $util-color-green;
+        }
+
+        &--red {
+          border: dashed $util-color-red;
         }
       }
     }
@@ -141,6 +165,30 @@
           &--double {
             border-bottom: double 3px $util-color-dark-grey;
           }
+        }
+      }
+    }
+
+    &-dash {
+      &__color {
+        &--black {
+          border-bottom: dashed $util-color-black;
+        }
+
+        &--dark-grey {
+          border-bottom: dashed $util-color-dark-grey;
+        }
+
+        &--blue {
+          border-bottom: dashed $util-color-blue;
+        }
+
+        &--green {
+          border-bottom: dashed $util-color-green;
+        }
+
+        &--red {
+          border-bottom: dashed $util-color-red;
         }
       }
     }
