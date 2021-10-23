@@ -5,6 +5,7 @@ import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
 import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
+import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
   PartsSimpleTable,
@@ -62,6 +63,10 @@ export const Sample: React.VFC = () => {
           textColor="blue"
           isDashed={true}
         />
+      </div>
+
+      <div className="m-xy2">
+        <PartsSimpleFlatButton />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />

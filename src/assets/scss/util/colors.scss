@@ -10,6 +10,32 @@ $util-color-red: #ac291d;
 $util-color-white: #ffffff;
 
 .util-color {
+  &__bg {
+    &--black {
+      background: $util-color-black;
+    }
+
+    &--dark-grey {
+      background: $util-color-dark-grey;
+    }
+
+    &--blue {
+      background: $util-color-blue;
+    }
+
+    &--green {
+      background: $util-color-green;
+    }
+
+    &--red {
+      background: $util-color-red;
+    }
+
+    &--white {
+      background: $util-color-white;
+    }
+  }
+
   &__text {
     &--black {
       color: $util-color-black;

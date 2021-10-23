@@ -1,6 +1,6 @@
 import React from 'react'
 
-type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red'
+type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red' | 'white'
 type Props = {
   text: string
   color: ColorType
