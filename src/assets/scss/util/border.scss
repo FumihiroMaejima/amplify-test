@@ -1,0 +1,75 @@
+
+
+
+
+@import './colors.scss';
+
+.util-border {
+  &-solid {
+    // 1px
+    &-1p {
+      &__color {
+        &--black {
+          border: solid 1px $util-color-black;
+        }
+
+        &--dark-grey {
+          border: solid 1px $util-color-dark-grey;
+        }
+
+        &--blue {
+          border: solid 1px $util-color-blue;
+        }
+
+        &--green {
+          border: solid 1px $util-color-green;
+        }
+
+        &--red {
+          border: solid 1px $util-color-red;
+        }
+
+        &--dash {
+          border: dashed 1px $util-color-dark-grey;
+        }
+
+        &--double {
+          border: double 1px $util-color-dark-grey;
+        }
+      }
+    }
+
+    // 3px
+    &-3p {
+      &__color {
+        &--black {
+          border: solid 3px $util-color-black;
+        }
+
+        &--dark-grey {
+          border: solid 3px $util-color-dark-grey;
+        }
+
+        &--blue {
+          border: solid 3px $util-color-blue;
+        }
+
+        &--green {
+          border: solid 3px $util-color-green;
+        }
+
+        &--red {
+          border: solid 3px $util-color-red;
+        }
+
+        &--dash {
+          border: dashed 2px $util-color-dark-grey;
+        }
+
+        &--double {
+          border: double 3px $util-color-dark-grey;
+        }
+      }
+    }
+  }
+}

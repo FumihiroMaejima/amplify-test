@@ -6,6 +6,7 @@
   margin: 1em 0;
   font-weight: 400;
   background: $util-color-white;
+  border: solid 3px $util-color-black defalut;
   border-radius: 10px;
 
   &__title {
@@ -58,33 +59,5 @@
   p {
     margin: 0;
     padding: 0;
-  }
-
-  &__black {
-    border: solid 3px $util-color-black;
-  }
-
-  &__dark-grey {
-    border: solid 3px $util-color-dark-grey;
-  }
-
-  &__blue {
-    border: solid 3px $util-color-blue;
-  }
-
-  &__green {
-    border: solid 3px $util-color-green;
-  }
-
-  &__red {
-    border: solid 3px $util-color-red;
-  }
-
-  &__dash {
-    border: dashed 2px $util-color-dark-grey;
-  }
-
-  &__double {
-    border: double 3px $util-color-dark-grey;
   }
 }
