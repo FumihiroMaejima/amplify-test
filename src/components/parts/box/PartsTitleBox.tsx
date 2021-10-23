@@ -20,7 +20,7 @@ export const PartsTitleBox: React.VFC<Props> = ({
 }) => {
   return (
     <div
-      className={`parts-title-box util-border-full-solid-3p__color--${color} util-color__text--${textColor}
+      className={`parts-title-box util-border-full-solid-2p__color--${color} util-color__text--${textColor}
        ${isDashed ? 'parts-title-box__dash' : ''} ${
         isDouble ? 'parts-title-box__double' : ''
       }

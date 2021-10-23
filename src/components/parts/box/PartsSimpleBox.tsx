@@ -18,7 +18,7 @@ export const PartsSimpleBox: React.VFC<Props> = ({
 }) => {
   return (
     <div
-      className={`parts-simple-box util-border-full-solid-3p__color--${color} util-color__text--${textColor}
+      className={`parts-simple-box util-border-full-solid-2p__color--${color} util-color__text--${textColor}
        ${isDashed ? 'parts-simple-box__dash' : ''} ${
         isDouble ? 'parts-simple-box__double' : ''
       }

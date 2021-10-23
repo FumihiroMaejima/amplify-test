@@ -7,35 +7,35 @@
 .util-border {
   &-full {
     &-solid {
-      // 1px
-      &-1p {
+      // 2px
+      &-2p {
         &__color {
           &--black {
-            border: solid 1px $util-color-black;
+            border: solid 2px $util-color-black;
           }
 
           &--dark-grey {
-            border: solid 1px $util-color-dark-grey;
+            border: solid 2px $util-color-dark-grey;
           }
 
           &--blue {
-            border: solid 1px $util-color-blue;
+            border: solid 2px $util-color-blue;
           }
 
           &--green {
-            border: solid 1px $util-color-green;
+            border: solid 2px $util-color-green;
           }
 
           &--red {
-            border: solid 1px $util-color-red;
+            border: solid 2px $util-color-red;
           }
 
           &--dash {
-            border: dashed 1px $util-color-dark-grey;
+            border: dashed 2px $util-color-dark-grey;
           }
 
           &--double {
-            border: double 1px $util-color-dark-grey;
+            border: double 2px $util-color-dark-grey;
           }
         }
       }
@@ -77,27 +77,27 @@
 
   &-bottom {
     &-solid {
-      // 1px
-      &-1p {
+      // 2px
+      &-2p {
         &__color {
           &--black {
-            border-bottom: solid 1px $util-color-black;
+            border-bottom: solid 2px $util-color-black;
           }
 
           &--dark-grey {
-            border-bottom: solid 1px $util-color-dark-grey;
+            border-bottom: solid 2px $util-color-dark-grey;
           }
 
           &--blue {
-            border-bottom: solid 1px $util-color-blue;
+            border-bottom: solid 2px $util-color-blue;
           }
 
           &--green {
-            border-bottom: solid 1px $util-color-green;
+            border-bottom: solid 2px $util-color-green;
           }
 
           &--red {
-            border-bottom: solid 1px $util-color-red;
+            border-bottom: solid 2px $util-color-red;
           }
 
           &--dash {
@@ -106,7 +106,7 @@
           }
 
           &--double {
-            border-bottom: double 1px $util-color-dark-grey;
+            border-bottom: double 2px $util-color-dark-grey;
           }
         }
       }
