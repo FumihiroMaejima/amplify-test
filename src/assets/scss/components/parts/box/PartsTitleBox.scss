@@ -1,16 +1,11 @@
-// label color
-$parts-title-box-color-black: #000000;
-$parts-title-box-color-dark-grey: #757575;
-$parts-title-box-color-blue: #1565c0;
-$parts-title-box-color-green: #006f5f;
-$parts-title-box-color-red: #ac291d;
+@import '../../../util/colors.scss';
 
 .parts-title-box {
   position: relative;
   padding: 0.5em 1em;
   margin: 1em 0;
   font-weight: 400;
-  background: #ffffff;
+  background: $util-color-white;
   border-radius: 10px;
 
   &__title {
@@ -18,7 +13,7 @@ $parts-title-box-color-red: #ac291d;
     display: inline-block;
     padding: 0 9px;
     font-size: 20px;
-    background: #ffffff;
+    background: $util-color-white;
     font-weight: 500;
 
     &--over {
@@ -33,29 +28,29 @@ $parts-title-box-color-red: #ac291d;
       height: 25px;
       line-height: 25px;
       background: #62c1ce;
-      color: #ffffff;
+      color: $util-color-white;
       border-radius: 5px 5px 0 0;
     }
 
     &-color {
       &--black {
-        color: $parts-title-box-color-black;;
+        color: $util-color-black;
       }
 
       &--dark-grey {
-        color: $parts-title-box-color-dark-grey;;
+        color: $util-color-dark-grey;
       }
 
       &--blue {
-        color: $parts-title-box-color-blue;;
+        color: $util-color-blue;
       }
 
       &--green {
-        color: $parts-title-box-color-green;;
+        color: $util-color-green;
       }
 
       &--red {
-        color: $parts-title-box-color-red;;
+        color: $util-color-red;
       }
     }
   }
@@ -66,52 +61,52 @@ $parts-title-box-color-red: #ac291d;
   }
 
   &__black {
-    border: solid 3px $parts-title-box-color-black;
+    border: solid 3px $util-color-black;
   }
 
   &__dark-grey {
-    border: solid 3px $parts-title-box-color-dark-grey;
+    border: solid 3px $util-color-dark-grey;
   }
 
   &__blue {
-    border: solid 3px $parts-title-box-color-blue;
+    border: solid 3px $util-color-blue;
   }
 
   &__green {
-    border: solid 3px $parts-title-box-color-green;
+    border: solid 3px $util-color-green;
   }
 
   &__red {
-    border: solid 3px $parts-title-box-color-red;
+    border: solid 3px $util-color-red;
   }
 
   &__dash {
-    border: dashed 2px $parts-title-box-color-dark-grey;
+    border: dashed 2px $util-color-dark-grey;
   }
 
   &__double {
-    border: double 3px $parts-title-box-color-dark-grey;
+    border: double 3px $util-color-dark-grey;
   }
 
   &__text {
     &--black {
-      color: $parts-title-box-color-black;;
+      color: $util-color-black;
     }
 
     &--dark-grey {
-      color: $parts-title-box-color-dark-grey;;
+      color: $util-color-dark-grey;
     }
 
     &--blue {
-      color: $parts-title-box-color-blue;;
+      color: $util-color-blue;
     }
 
     &--green {
-      color: $parts-title-box-color-green;;
+      color: $util-color-green;
     }
 
     &--red {
-      color: $parts-title-box-color-red;;
+      color: $util-color-red;
     }
   }
 }

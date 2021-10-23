@@ -1,0 +1,38 @@
+
+
+
+// util colors
+$util-color-black: #000000;
+$util-color-dark-grey: #757575;
+$util-color-blue: #1565c0;
+$util-color-green: #006f5f;
+$util-color-red: #ac291d;
+$util-color-white: #ffffff;
+
+.util-color {
+  &__text {
+    &--black {
+      color: $util-color-black;
+    }
+
+    &--dark-grey {
+      color: $util-color-dark-grey;
+    }
+
+    &--blue {
+      color: $util-color-blue;
+    }
+
+    &--green {
+      color: $util-color-green;
+    }
+
+    &--red {
+      color: $util-color-red;
+    }
+
+    &--white {
+      color: $util-color-white;
+    }
+  }
+}

@@ -1,9 +1,4 @@
-// label color
-$parts-simple-heading-color-black: #000000;
-$parts-simple-heading-color-dark-grey: #757575;
-$parts-simple-heading-color-blue: #1565c0;
-$parts-simple-heading-color-green: #006f5f;
-$parts-simple-heading-color-red: #ac291d;
+@import '../../../util/colors.scss';
 
 .parts-simple-heading {
   text-align: left;
@@ -11,39 +6,39 @@ $parts-simple-heading-color-red: #ac291d;
   font-weight: 400;
 
   &__black {
-    border-bottom: solid 3px $parts-simple-heading-color-black;
+    border-bottom: solid 3px $util-color-black;
   }
 
   &__dark-grey {
-    border-bottom: solid 3px $parts-simple-heading-color-dark-grey;
+    border-bottom: solid 3px $util-color-dark-grey;
   }
 
   &__blue {
-    border-bottom: solid 3px $parts-simple-heading-color-blue;
+    border-bottom: solid 3px $util-color-blue;
   }
 
   &__green {
-    border-bottom: solid 3px $parts-simple-heading-color-green;
+    border-bottom: solid 3px $util-color-green;
   }
 
   &__red {
-    border-bottom: solid 3px $parts-simple-heading-color-red;
+    border-bottom: solid 3px $util-color-red;
   }
 
   &__dash {
-    color: $parts-simple-heading-color-dark-grey;
-    border-bottom: dashed $parts-simple-heading-color-dark-grey;
+    color: $util-color-dark-grey;
+    border-bottom: dashed $util-color-dark-grey;
   }
 
   &__double {
-    border-bottom: double 3px $parts-simple-heading-color-dark-grey;
+    border-bottom: double 3px $util-color-dark-grey;
   }
 
   &__up-down {
-    border-bottom: double 3px $parts-simple-heading-color-dark-grey;
-    color: $parts-simple-heading-color-dark-grey;
+    border-bottom: double 3px $util-color-dark-grey;
+    color: $util-color-dark-grey;
     padding: 0.5em 0; // tb, rl
-    border-top: solid 3px $parts-simple-heading-color-dark-grey;
-    border-bottom: solid 3px $parts-simple-heading-color-dark-grey;
+    border-top: solid 3px $util-color-dark-grey;
+    border-bottom: solid 3px $util-color-dark-grey;
   }
 }
