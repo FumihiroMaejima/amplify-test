@@ -18,7 +18,7 @@ export const PartsSimpleHeading: React.VFC<Props> = ({
 }) => {
   return (
     <h1
-      className={`parts-simple-heading parts-simple-heading__${color} ${
+      className={`parts-simple-heading util-border-bottom-solid-3p__color--${color} ${
         isDashed ? 'parts-simple-heading__dash' : ''
       } ${isDouble ? 'parts-simple-heading__double' : ''}
       ${isUpAndDown ? 'parts-simple-heading__up-down' : ''}

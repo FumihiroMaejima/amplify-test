@@ -5,69 +5,142 @@
 @import './colors.scss';
 
 .util-border {
-  &-solid {
-    // 1px
-    &-1p {
-      &__color {
-        &--black {
-          border: solid 1px $util-color-black;
-        }
+  &-full {
+    &-solid {
+      // 1px
+      &-1p {
+        &__color {
+          &--black {
+            border: solid 1px $util-color-black;
+          }
 
-        &--dark-grey {
-          border: solid 1px $util-color-dark-grey;
-        }
+          &--dark-grey {
+            border: solid 1px $util-color-dark-grey;
+          }
 
-        &--blue {
-          border: solid 1px $util-color-blue;
-        }
+          &--blue {
+            border: solid 1px $util-color-blue;
+          }
 
-        &--green {
-          border: solid 1px $util-color-green;
-        }
+          &--green {
+            border: solid 1px $util-color-green;
+          }
 
-        &--red {
-          border: solid 1px $util-color-red;
-        }
+          &--red {
+            border: solid 1px $util-color-red;
+          }
 
-        &--dash {
-          border: dashed 1px $util-color-dark-grey;
-        }
+          &--dash {
+            border: dashed 1px $util-color-dark-grey;
+          }
 
-        &--double {
-          border: double 1px $util-color-dark-grey;
+          &--double {
+            border: double 1px $util-color-dark-grey;
+          }
+        }
+      }
+
+      // 3px
+      &-3p {
+        &__color {
+          &--black {
+            border: solid 3px $util-color-black;
+          }
+
+          &--dark-grey {
+            border: solid 3px $util-color-dark-grey;
+          }
+
+          &--blue {
+            border: solid 3px $util-color-blue;
+          }
+
+          &--green {
+            border: solid 3px $util-color-green;
+          }
+
+          &--red {
+            border: solid 3px $util-color-red;
+          }
+
+          &--dash {
+            border: dashed 2px $util-color-dark-grey;
+          }
+
+          &--double {
+            border: double 3px $util-color-dark-grey;
+          }
         }
       }
     }
+  }
 
-    // 3px
-    &-3p {
-      &__color {
-        &--black {
-          border: solid 3px $util-color-black;
+  &-bottom {
+    &-solid {
+      // 1px
+      &-1p {
+        &__color {
+          &--black {
+            border-bottom: solid 1px $util-color-black;
+          }
+
+          &--dark-grey {
+            border-bottom: solid 1px $util-color-dark-grey;
+          }
+
+          &--blue {
+            border-bottom: solid 1px $util-color-blue;
+          }
+
+          &--green {
+            border-bottom: solid 1px $util-color-green;
+          }
+
+          &--red {
+            border-bottom: solid 1px $util-color-red;
+          }
+
+          &--dash {
+            color: $util-color-dark-grey;
+            border-bottom: dashed $util-color-dark-grey;
+          }
+
+          &--double {
+            border-bottom: double 1px $util-color-dark-grey;
+          }
         }
+      }
+      // 3px
+      &-3p {
+        &__color {
+          &--black {
+            border-bottom: solid 3px $util-color-black;
+          }
 
-        &--dark-grey {
-          border: solid 3px $util-color-dark-grey;
-        }
+          &--dark-grey {
+            border-bottom: solid 3px $util-color-dark-grey;
+          }
 
-        &--blue {
-          border: solid 3px $util-color-blue;
-        }
+          &--blue {
+            border-bottom: solid 3px $util-color-blue;
+          }
 
-        &--green {
-          border: solid 3px $util-color-green;
-        }
+          &--green {
+            border-bottom: solid 3px $util-color-green;
+          }
 
-        &--red {
-          border: solid 3px $util-color-red;
-        }
+          &--red {
+            border-bottom: solid 3px $util-color-red;
+          }
 
-        &--dash {
-          border: dashed 2px $util-color-dark-grey;
-        }
+          &--dash {
+            color: $util-color-dark-grey;
+            border-bottom: dashed $util-color-dark-grey;
+          }
 
-        &--double {
-          border: double 3px $util-color-dark-grey;
+          &--double {
+            border-bottom: double 3px $util-color-dark-grey;
+          }
         }
       }
     }
