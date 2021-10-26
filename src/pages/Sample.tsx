@@ -75,6 +75,11 @@ export const Sample: React.VFC = () => {
 
       <div className="m-xy2">
         <PartsSimpleButton text="button text" />
+        <PartsSimpleButton text="black" color="black" />
+        <PartsSimpleButton text="blue" color="blue" />
+        <PartsSimpleButton text="red" color="red" />
+        <PartsSimpleButton text="green" color="green" />
+        <PartsSimpleButton text="white" color="white" />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
