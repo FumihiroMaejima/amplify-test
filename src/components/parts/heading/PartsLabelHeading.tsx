@@ -16,14 +16,14 @@ export const PartsLabelHeading: React.VFC<Props> = ({
   isDouble = false,
 }) => {
   return (
-    <h1
+    <h2
       className={`parts-label-heading util-border-left-solid-5p__color--${color} ${
         isDashed ? `util-border-bottom-dash__color--${color}` : ''
       } ${isDouble ? 'parts-label-heading__double' : ''}
       `}
     >
       {text}
-    </h1>
+    </h2>
   )
 }
 
