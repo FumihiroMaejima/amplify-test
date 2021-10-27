@@ -194,6 +194,110 @@
     }
   }
 
+  &-left {
+    &-solid {
+      // 2px
+      &-2p {
+        &__color {
+          &--black {
+            border-bottom: solid 2px $util-color-black;
+          }
+
+          &--dark-grey {
+            border-bottom: solid 2px $util-color-dark-grey;
+          }
+
+          &--blue {
+            border-bottom: solid 2px $util-color-blue;
+          }
+
+          &--green {
+            border-bottom: solid 2px $util-color-green;
+          }
+
+          &--red {
+            border-bottom: solid 2px $util-color-red;
+          }
+
+          &--dash {
+            color: $util-color-dark-grey;
+            border-bottom: dashed $util-color-dark-grey;
+          }
+
+          &--double {
+            border-bottom: double 2px $util-color-dark-grey;
+          }
+        }
+      }
+      // 3px
+      &-3p {
+        &__color {
+          &--black {
+            border-bottom: solid 3px $util-color-black;
+          }
+
+          &--dark-grey {
+            border-bottom: solid 3px $util-color-dark-grey;
+          }
+
+          &--blue {
+            border-bottom: solid 3px $util-color-blue;
+          }
+
+          &--green {
+            border-bottom: solid 3px $util-color-green;
+          }
+
+          &--red {
+            border-bottom: solid 3px $util-color-red;
+          }
+
+          &--dash {
+            color: $util-color-dark-grey;
+            border-bottom: dashed $util-color-dark-grey;
+          }
+
+          &--double {
+            border-bottom: double 3px $util-color-dark-grey;
+          }
+        }
+      }
+
+      &-5p {
+        &__color {
+          &--black {
+            border-left: solid 5px $util-color-black;
+          }
+
+          &--dark-grey {
+            border-left: solid 5px $util-color-dark-grey;
+          }
+
+          &--blue {
+            border-left: solid 5px $util-color-blue;
+          }
+
+          &--green {
+            border-left: solid 5px $util-color-green;
+          }
+
+          &--red {
+            border-left: solid 5px $util-color-red;
+          }
+
+          &--dash {
+            color: $util-color-dark-grey;
+            border-left: dashed $util-color-dark-grey;
+          }
+
+          &--double {
+            border-left: double 5px $util-color-dark-grey;
+          }
+        }
+      }
+    }
+  }
+
   &-radius {
     &__round {
       &--5p {
