@@ -5,6 +5,7 @@ import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
 import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
+import { PartsCircleButton } from '@/components/parts/button/PartsCircleButton'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
@@ -80,6 +81,15 @@ export const Sample: React.VFC = () => {
         <PartsSimpleButton text="red" color="red" />
         <PartsSimpleButton text="green" color="green" />
         <PartsSimpleButton text="white" color="white" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsCircleButton text="text" />
+        <PartsCircleButton text="black" color="black" />
+        <PartsCircleButton text="blue" color="blue" />
+        <PartsCircleButton text="red" color="red" />
+        <PartsCircleButton text="green" color="green" />
+        <PartsCircleButton text="white" color="white" />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
