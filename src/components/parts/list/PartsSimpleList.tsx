@@ -16,7 +16,7 @@ export const PartsSimpleList: React.VFC<Props> = ({
   return (
     <ul
       // className={`parts-simple-button util-color__bg--${color} util-color__text--${textColor}`}
-      className={`parts-simple-list parts-simple-list__color--${color} util-color__text--${textColor}`}
+      className={`parts-simple-list util-border-full-solid-2p__color--${color} util-border-radius__round--5p util-color__text--${textColor}`}
     >
       {items.map((item: ItemType, i) => (
         <li key={i}>{item}</li>

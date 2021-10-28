@@ -105,6 +105,9 @@ export const Sample: React.VFC = () => {
 
       <div className="m-xy2">
         <PartsSimpleList items={[1, 2, 3, 4, 5]} />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="blue" />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="red" />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="green" />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
