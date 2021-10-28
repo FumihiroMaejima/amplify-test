@@ -83,7 +83,7 @@ $parts-circle-button-default-border-bottom-color: #00d21c;
 
       &:active {
         border-bottom: none;
-        border: solid 1px $util-color-dark-grey;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
       }
     }
   }
