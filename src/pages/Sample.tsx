@@ -11,6 +11,7 @@ import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlat
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsSimpleList } from '@/components/parts/list/PartsSimpleList'
+import { PartsStickyNoteList } from '@/components/parts/list/PartsStickyNoteList'
 import {
   PartsSimpleTable,
   TableHeaderType,
@@ -108,6 +109,10 @@ export const Sample: React.VFC = () => {
         <PartsSimpleList items={[1, 2, 3, 4, 5]} color="blue" />
         <PartsSimpleList items={[1, 2, 3, 4, 5]} color="red" />
         <PartsSimpleList items={[1, 2, 3, 4, 5]} color="green" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsStickyNoteList items={[1, 2, 3, 4, 5]} />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />
