@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // pages
 import { About } from '@/pages/About'
 import { Home } from '@/pages/Home'
+import { Sample } from '@/pages/Sample'
 
 export const AppRouter = (): JSX.Element => {
   return (
@@ -11,6 +12,7 @@ export const AppRouter = (): JSX.Element => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/sample" component={Sample} />
       </Switch>
     </BrowserRouter>
   )

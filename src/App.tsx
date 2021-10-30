@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from '@/assets/img/logo.svg'
+// import logo from '@/assets/img/logo.svg'
 import { AppRouter } from '@/AppRouter'
 import { GlobalFooter } from '@/components/_global/GlobalFooter'
 import { GlobalHeader } from '@/components/_global/GlobalHeader'
