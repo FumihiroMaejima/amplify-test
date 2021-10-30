@@ -1,45 +1,53 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router-dom'
-import { ContentTexts } from '@/components/modules/about/ContentTexts'
-import { PartsLabelHeader } from '@/components/parts/PartsLabelHeader'
-import { PartsContentsBoard } from '@/components/parts/PartsContentsBoard'
-import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
+import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
+import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
+import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 // import '@/assets/scss/index.scss'
 
 export const Home: React.VFC = () => {
   return (
     <div className="page-container page-container__mx-auto">
-      <h1 className="page-header">About</h1>
+      <PartsSimpleHeading text="サンプル ページ" color="dark-grey" />
+      <div className="m-x2">
+        <PartsLabelHeading text="サブヘッダー1" color="blue" />
+        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+          <p>test1</p>
+          <p>test2</p>
+          <p>test3</p>
+        </div>
 
-      {/* <PartsContentsBoard>
-        <PartsLabelHeader text="このWebサイトについて" color="blue" />
-      </PartsContentsBoard> */}
+        <PartsLabelHeading text="サブヘッダー2" color="red" />
+        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+          <p>test1</p>
+          <p>test2</p>
+          <p>test3</p>
+        </div>
 
-      <PartsContentsBoard>
-        {/* <PartsLabelHeader text="このWebサイトについて" color="blue" /> */}
-        <ContentTexts />
-      </PartsContentsBoard>
+        <PartsLabelHeading text="サブヘッダー3" color="green" />
+        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+          <p>test1</p>
+          <p>test2</p>
+          <p>test3</p>
+        </div>
 
-      <div className="">
-        <PartsLabelHeader text="label header" color="blue" />
-        <PartsContentsBoard>
-          <PartsLabelHeader text="Slot label header" color="blue" />
-        </PartsContentsBoard>
-        <p>Hello Home!</p>
+        <PartsLabelHeading text="サンプルボタン" color="dark-grey" />
+        <div className="m-y2">
+          <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+            <PartsSimpleButton text="blue" color="blue" />
+            <PartsSimpleButton text="red" color="red" />
+            <PartsSimpleButton text="green" color="green" />
+          </div>
+        </div>
       </div>
-      <div className="">
-        <p>Hello Home!</p>
-        <PartsMessageBoard>
-          <PartsLabelHeader text="Slot label header" color="blue" />
-        </PartsMessageBoard>
-      </div>
-      <div className="">
+
+      {/* <div className="">
         <Link to={`/about`}>Go To About</Link>
       </div>
       <div className="">
         <Link to={`/sample`}>Go To Sample</Link>
-      </div>
+      </div> */}
     </div>
   )
 }

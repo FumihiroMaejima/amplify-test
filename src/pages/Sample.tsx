@@ -5,7 +5,13 @@ import { PartsLabelTable } from '@/components/parts/table/PartsLabelTable'
 import { PartsMessageBoard } from '@/components/parts/PartsMessageBoard'
 import { PartsSimpleBox } from '@/components/parts/box/PartsSimpleBox'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
+import { PartsCircleButton } from '@/components/parts/button/PartsCircleButton'
+import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
+import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
+import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
+import { PartsSimpleList } from '@/components/parts/list/PartsSimpleList'
+import { PartsStickyNoteList } from '@/components/parts/list/PartsStickyNoteList'
 import {
   PartsSimpleTable,
   TableHeaderType,
@@ -48,11 +54,65 @@ export const Sample: React.VFC = () => {
       </div>
 
       <div className="m-xy2">
+        <PartsSimpleBox text="simple box" textColor="red" isDashed={false} />
+      </div>
+
+      <div className="m-xy2">
         <PartsTitleBox text="title box" isDashed={false} />
       </div>
 
       <div className="m-xy2">
-        <PartsTitleBox text="title box" color="green" isDashed={true} />
+        <PartsTitleBox
+          text="title box"
+          color="green"
+          textColor="blue"
+          isDashed={true}
+        />
+      </div>
+
+      <div className="m-xy2">
+        <PartsSimpleFlatButton />
+        <PartsSimpleFlatButton color="blue" />
+        <PartsSimpleFlatButton color="green" />
+        <PartsSimpleFlatButton color="red" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsSimpleButton text="button text" />
+        <PartsSimpleButton text="black" color="black" />
+        <PartsSimpleButton text="blue" color="blue" />
+        <PartsSimpleButton text="red" color="red" />
+        <PartsSimpleButton text="green" color="green" />
+        <PartsSimpleButton text="white" color="white" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsCircleButton text="text" />
+        <PartsCircleButton text="black" color="black" />
+        <PartsCircleButton text="blue" color="blue" />
+        <PartsCircleButton text="red" color="red" />
+        <PartsCircleButton text="green" color="green" />
+        <PartsCircleButton text="white" color="white" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsLabelHeading text="text" />
+      </div>
+      <PartsLabelHeading text="grey" />
+      <PartsLabelHeading text="blue" color="blue" />
+      <PartsLabelHeading text="red" color="red" />
+      <PartsLabelHeading text="green" color="green" />
+      <PartsLabelHeading text="white" color="white" />
+
+      <div className="m-xy2">
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="blue" />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="red" />
+        <PartsSimpleList items={[1, 2, 3, 4, 5]} color="green" />
+      </div>
+
+      <div className="m-xy2">
+        <PartsStickyNoteList items={[1, 2, 3, 4, 5]} />
       </div>
 
       <PartsLabelHeader text="Slot label header" color="blue" />

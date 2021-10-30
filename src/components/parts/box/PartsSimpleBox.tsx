@@ -1,6 +1,6 @@
 import React from 'react'
 
-type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red'
+type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red' | 'white'
 type Props = {
   text: string
   color?: ColorType
@@ -18,8 +18,8 @@ export const PartsSimpleBox: React.VFC<Props> = ({
 }) => {
   return (
     <div
-      className={`parts-simple-box parts-simple-box__${color} parts-simple-box__text--${textColor}
-       ${isDashed ? 'parts-simple-box__dash' : ''} ${
+      className={`parts-simple-box util-border-full-solid-2p__color--${color} util-border-radius__round--5p util-color__text--${textColor}
+       ${isDashed ? `util-border-full-dash__color--${color}` : ''} ${
         isDouble ? 'parts-simple-box__double' : ''
       }
       `}

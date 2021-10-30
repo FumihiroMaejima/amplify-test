@@ -1,6 +1,6 @@
 import React from 'react'
 
-type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red'
+type ColorType = 'black' | 'dark-grey' | 'blue' | 'green' | 'red' | 'white'
 type Props = {
   text: string
   title?: string
@@ -20,8 +20,8 @@ export const PartsTitleBox: React.VFC<Props> = ({
 }) => {
   return (
     <div
-      className={`parts-title-box parts-title-box__${color} parts-title-box__text--${textColor}
-       ${isDashed ? 'parts-title-box__dash' : ''} ${
+      className={`parts-title-box util-border-full-solid-2p__color--${color} util-border-radius__round--5p util-color__text--${textColor}
+       ${isDashed ? `util-border-full-dash__color--${color}` : ''} ${
         isDouble ? 'parts-title-box__double' : ''
       }
       `}
