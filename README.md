@@ -742,6 +742,8 @@ PC再起動後にインストールしたバージョンを反映させる為に
 
 *既にプロファイルが作成済みの場合
 
+*プロファイル未作成の場合.awsのディレクトリの作成とパーミッションを付与する。
+
 ```Shell-session
 $ cat ~/.aws/credentials
 [default]
@@ -815,11 +817,154 @@ amplifyを使用する場合はamplify用のプロファイルを設定してお
 
 ---
 
-## amplifyの設定
+## amplify-cliの設定
+
+### amplify-cliのインストール
 
 ```Shell-session
+$ npm install -g @aws-amplify/cli
+
+$ amplify -v
+6.3.1
+```
+
+### configureの設定
+
+```Shell-session
+$ amplify configure
+```
+
+AWSのマネジメントコンソールを開きつつ新しいIAMユーザーを作成する。
+
+ユーザー詳細の設定、AWSアクセスの種類の設定、アクセス権限の設定、タグの設定を行う。
+
+- AWSアクセスの種類→`プログラムによるアクセス`のみを選択する。
+- アクセス権限の設定→`AdministratorAccess`やAmplifyの権限を設定する。
+- タグは任意
+
+作成後にaccess_keyなどをローカルに設定してプロファイル情報を保存する。
+
+`.aws/config`、`.aws/credentials`が更新される。
+
+```Shell-session
+$ amplify configure
+Follow these steps to set up access to your AWS account:
+
+Sign in to your AWS administrator account:
+https://console.aws.amazon.com/
+Press Enter to continue
+
+Specify the AWS Region
+? region:  ap-northeast-1
+Specify the username of the new IAM user:
+? user name:  amplify-test-user
+Complete the user creation using the AWS console
+xxxxxxxxxx
+Press Enter to continue
+
+Enter the access key of the newly created user:
+? accessKeyId:  ********************
+? secretAccessKey:  ****************************************
+This would update/create the AWS Profile in your local machine
+? Profile Name:  profile_name
+
+Successfully set up the new user.
+```
+
+---
+
+## アプリケーションへのamplifyの設定
+
+初期化コマンド
+
+*実行後に作成される`amplify`ディレクトリに秘匿情報が含まれるている為、必ず`gitignore`に入れる事。
+
+
+```Shell-session
+$ amplify init
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project amplifytest
+The following configuration will be applied:
+
+Project information
+| Name: amplifytest
+| Environment: dev
+| Default editor: Visual Studio Code
+| App type: javascript
+| Javascript framework: react
+| Source Directory Path: src
+| Distribution Directory Path: build
+| Build Command: npm run-script build
+| Start Command: npm run-script start
+
+? Initialize the project with the above configuration? No
+? Enter a name for the environment dev
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you're building javascript
+Please tell us about your project
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: dist
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+Using default provider  awscloudformation
+
+? Select the authentication method you want to use: AWS profile
+
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+? Please choose the profile you want to use profile_name
+Adding backend environment dev to AWS Amplify Console app: xxxxxxxxxxx
+⠼ Initializing project in the cloud...
+
+Initialized your environment successfully.
+
+Your project has been successfully initialized and connected to the cloud!
+
+Some next steps:
+"amplify status" will show you what you've added already and if it's locally configured or deployed
+"amplify add <category>" will allow you to add features like user login or a backend API
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify console" to open the Amplify Console and view your project status
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+Pro tip:
+Try "amplify add api" to create a backend API and then "amplify publish" to deploy everything
 
 ```
+
+---
+
+## reactアプリケーションにamplifyを適用する
+
+
+下記のパッケージを追加する。
+
+認証関連を扱わない場合は`aws-amplify`のみで良い。
+
+```Shell-session
+$ yarn add aws-amplify aws-amplify-react
+```
+
+`amplify init`後に作成される、`/src/aws-exports.js`をts拡張子に変更する(`gitignore`にも追加)。
+
+
+### App.tsxに設定の追加
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsmobile from '@/aws-exports'
+
+// Amplifyの設定を行う
+Amplify.configure(awsmobile)
+```
+
+
+---
+
+## amplify-cliコマンド一覧
 
 ### ステータスの確認
 
