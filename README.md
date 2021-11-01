@@ -815,6 +815,13 @@ secret_key     ****************XXXX shared-credentials-file
 
 amplifyを使用する場合はamplify用のプロファイルを設定しておく事。
 
+### IAMユーザーやグループの確認
+
+```Shell-session
+$ aws iam list-users
+$ aws iam list-groups
+```
+
 ---
 
 ## amplify-cliの設定
@@ -828,7 +835,7 @@ $ amplify -v
 6.3.1
 ```
 
-### configureの設定
+### configureの設定(AWSアカウントの紐付け)
 
 ```Shell-session
 $ amplify configure
@@ -839,7 +846,7 @@ AWSのマネジメントコンソールを開きつつ新しいIAMユーザー�
 ユーザー詳細の設定、AWSアクセスの種類の設定、アクセス権限の設定、タグの設定を行う。
 
 - AWSアクセスの種類→`プログラムによるアクセス`のみを選択する。
-- アクセス権限の設定→`AdministratorAccess`やAmplifyの権限を設定する。
+- アクセス権限の設定→`AdministratorAccess`や`AdministratorAccess-Amplify`を設定する。
 - タグは任意
 
 作成後にaccess_keyなどをローカルに設定してプロファイル情報を保存する。
@@ -934,6 +941,10 @@ Try "amplify add api" to create a backend API and then "amplify publish" to depl
 
 ```
 
+この時点でクラウド上に`Amplify`にアプリケーションが、`CloudFormation`にスタックが、`S3`にバックエンド用のバケットが作成される。
+
+各スタックに設定されている`テンプレート`を`デザイナー`で確認する事が出来る。
+
 ---
 
 ## reactアプリケーションにamplifyを適用する
@@ -978,6 +989,68 @@ $ amplify status
 └──────────┴───────────────┴───────────┴─────────────────┘
 
 ```
+
+
+### サイトの公開(ホスティングの追加)
+
+下記のコマンドでS3での静的ウェブホスティングを有効にする。
+バケット名に何も指定しない場合はデフォルトでユニークなバケットを作成する。
+
+
+```Shell-session
+$ amplify add hosting
+? Select the plugin module to execute Amazon CloudFront and S3
+? Select the environment setup: PROD (S3 with CloudFront using HTTPS)
+? hosting bucket name bucket_name
+Static webhosting is disabled for the hosting bucket when CloudFront Distribution is enabled.
+
+You can now publish your app using the following command:
+Command: amplify publish
+
+```
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ Create    │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+```
+
+この時点でクラウド上のS3,CloudFrontに影響は無い。
+
+
+### アプリケーションのデプロイ
+
+下記のコマンドでS3での静的ウェブホスティングを有効にする。
+バケット名に何も指定しない場合はデフォルトでユニークなバケットを作成する。
+
+
+```Shell-session
+$ apmlify add publish
+
+
+```
+
+---
+
+## amplify-cliを用いた開発の流れ
+
+1. `amplify add xxx`でアプリケーションに必要なAWSのサービスを追加する。
+2. `amplify push`で追加した機能有効化させる。
+3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
+
+
+```Shell-session
+
+```
+
+
 
 ---
 
