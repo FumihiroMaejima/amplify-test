@@ -745,6 +745,13 @@ PC再起動後にインストールしたバージョンを反映させる為に
 *プロファイル未作成の場合.awsのディレクトリの作成とパーミッションを付与する。
 
 ```Shell-session
+$ mkdir .aws
+$ chmod 766 .aws
+$ cd ~/.aws
+$ touch credentials
+```
+
+```Shell-session
 $ cat ~/.aws/credentials
 [default]
 aws_access_key_id=xxxxxxxxxxxxxxxxxxxx
