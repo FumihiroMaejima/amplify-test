@@ -1092,7 +1092,8 @@ $ amplify add publish
 │ Hosting  │ S3AndCloudFront │ No Change │ awscloudformation │
 └──────────┴─────────────────┴───────────┴───────────────────┘
 
-No changes detected
+? Are you sure you want to continue? Yes
+⠦ Updating resources in the cloud. This may take a few minutes...
 
 > amplify-test@0.0.0 build /path/amplify-test
 > tsc && vite build
@@ -1165,8 +1166,9 @@ Hosting endpointにアクセスするとビルドしたファイルにアクセ�
 ## amplify-cliを用いた開発の流れ
 
 1. `amplify add xxx`でアプリケーションに必要なAWSのサービスを追加する。
-2. `amplify push`で追加した機能有効化させる。
+2. `amplify push`で追加した機能を有効化させる(CloudFrontのテンプレートファイルを更新)。
 3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
+4. `amplify delete`でinitで作成した環境を全て削除。
 
 
 ```Shell-session
