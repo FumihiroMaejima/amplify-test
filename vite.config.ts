@@ -14,9 +14,20 @@ export default defineConfig({
   },
   base: '/',
   resolve: {
-    alias: {
+    alias: [
+      {
+        find: '@/',
+        replacement: path.join(__dirname, './src/'),
+      },
+      {
+        // amplify setting.
+        find: './runtimeConfig',
+        replacement: './runtimeConfig.browser',
+      },
+    ],
+    /* alias: {
       '@/': path.join(__dirname, './src/'),
-    },
+    }, */
   },
   server: {
     open: true,

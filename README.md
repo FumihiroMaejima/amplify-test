@@ -1081,7 +1081,7 @@ $ amplify status
 
 
 ```Shell-session
-$ apmlify add publish
+$ amplify add publish
 
 
 ```
@@ -1093,6 +1093,25 @@ $ apmlify add publish
 1. `amplify add xxx`でアプリケーションに必要なAWSのサービスを追加する。
 2. `amplify push`で追加した機能有効化させる。
 3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
+
+
+```Shell-session
+
+```
+
+
+---
+
+## troubleshooting
+
+2021/11/02 現在
+
+viteでamplifyを使うと、
+下記の様な現象が見られる為
+
+
+[aws/aws-sdk-js/issues/3673](https://github.com/aws/aws-sdk-js/issues/3673)
+[getting-started/installation?platform=vue#troubleshooting](https://ui.docs.amplify.aws/ui/getting-started/installation?platform=vue#troubleshooting)
 
 
 ```Shell-session
