@@ -1082,9 +1082,83 @@ $ amplify status
 
 ```Shell-session
 $ amplify add publish
+✔ Successfully pulled backend environment dev from the cloud.
 
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ No Change │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+No changes detected
+
+> amplify-test@0.0.0 build /path/amplify-test
+> tsc && vite build
+
+vite v2.6.7 building for production...
+✓ 2049 modules transformed.
+../dist/assets/favicon.17e50649.svg   1.49 KiB
+../dist/index.html                    0.64 KiB
+../dist/assets/index.55884c9b.js      13.36 KiB / gzip: 3.21 KiB
+../dist/assets/index.20a02549.css     17.60 KiB / gzip: 3.41 KiB
+../dist/assets/vendor.50132193.js     688.03 KiB / gzip: 188.47 KiB
+
+(!) Some chunks are larger than 500 KiB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/guide/en/#outputmanualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+frontend build command exited with code 0
+Publish started for S3AndCloudFront
+✔ Uploaded files successfully.
+Your app is published successfully.
+https://xxxxxxxxxx.cloudfront.net
 
 ```
+
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ No Change │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+Hosting endpoint: https://xxxxxxxxxx.cloudfront.net
+
+```
+
+Hosting endpointにアクセスするとビルドしたファイルにアクセスする事が出来る。
+
+
+`production mode`でビルドがされていない。
+
+`Environment: dev`の影響と思われる。→devtoolは反応するがprofilingが出来ないので問題無いと思われる。
+
+
+
+---
+
+## 初回publishした段階の状態
+
+1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
+2. `S3AndCloudFront`ディレクトリに内には`parameters.json`や`template.json`などs3のバケット情報やcloudformantionのスタックのテンプレートが記載されている。
+3. `aws-exports.js`に`aws_content_delivery_bucket`や`aws_content_delivery_bucket_region`、`aws_content_delivery_url`が追記される。
+4. `aws-exports.ts`には上書きされないので要注意が必要か。
+5. cloud上のamplifyコンソールにはbackendのみがデプロイされている状態である。
+6. ビルドしたフロントエンドファイルはS3&cloudfrontに置かれている為完全に別れている。(s3は別バケットになっている。cloudformationのスタックはネストされている。)
+
+
+```Shell-session
+
+```
+
+
 
 ---
 
