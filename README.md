@@ -829,6 +829,12 @@ $ aws iam list-users
 $ aws iam list-groups
 ```
 
+### S3の確認
+
+```Shell-session
+$ aws s3 ls
+```
+
 ---
 
 ## amplify-cliの設定
@@ -952,6 +958,40 @@ Try "amplify add api" to create a backend API and then "amplify publish" to depl
 
 各スタックに設定されている`テンプレート`を`デザイナー`で確認する事が出来る。
 
+
+`amplify init`で行った設定はプロジェクトフォルダ内の`amplify/.config/local-env-info.json`と`amplify/.config/project-config.json`で確認出来る。
+
+
+```Shell-session
+$ cat amplify/.config/local-env-info.json
+{
+  "projectPath": "/path/amplify-test",
+  "defaultEditor": "vscode",
+  "envName": "dev"
+}
+```
+
+```Shell-session
+$ cat amplify/.config/project-config.json
+{
+  "projectName": "amplifytest",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
+```
+
 ---
 
 ## reactアプリケーションにamplifyを適用する
@@ -1036,6 +1076,8 @@ $ amplify status
 
 下記のコマンドでS3での静的ウェブホスティングを有効にする。
 バケット名に何も指定しない場合はデフォルトでユニークなバケットを作成する。
+
+事前に`amplify add hosting`を実行しておく必要がある。
 
 
 ```Shell-session
