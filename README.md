@@ -835,6 +835,19 @@ $ aws iam list-groups
 $ aws s3 ls
 ```
 
+### cloudfrontのディストリビューションの設定確認
+
+```Shell-session
+$ aws cloudfront get-distribution-config --id ${DISTRIBUTION_ID}
+```
+
+### cloudformationのスタックの確認
+
+```Shell-session
+$ aws cloudformation list-stacks
+```
+
+
 ---
 
 ## amplify-cliの設定
@@ -1070,6 +1083,10 @@ $ amplify status
 ```
 
 この時点でクラウド上のS3,CloudFrontに影響は無い。
+
+`Select the plugin module to execute`の質問の際に`amplify`の選択肢がある。
+
+恐らく、これを選ぶとamplifyコンソール側(バックエンドをデプロイしたアプリ)にフロントエンドととしてホストされる。(未検証)
 
 
 ### アプリケーションのデプロイ
