@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsmobile from '@/aws-exports'
 // import logo from '@/assets/img/logo.svg'
 import { AppRouter } from '@/AppRouter'
 import { GlobalFooter } from '@/components/_global/GlobalFooter'
 import { GlobalHeader } from '@/components/_global/GlobalHeader'
 import '@/assets/scss/App.scss'
+
+// Amplifyの設定を行う
+Amplify.configure(awsmobile)
 
 function App() {
   const [count, setCount] = useState(0)

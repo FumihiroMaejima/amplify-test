@@ -666,5 +666,553 @@ modules
 views
 ```
 
+---
+
+## aws-cliの設定
+
+`pyenv`のインストール
+
+```Shell-session
+$ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+~ $ pyenv --version
+pyenv 2.2.0-5-g54889eb8
+```
+`v2`から`~/.bashrc`に記載する推奨内容が変更されている。
+
+### ~/.bash_profile
+
+```Shell-session
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+```
+
+### ~/.bashrc
+
+```Shell-session
+# pyenv
+eval "$(pyenv init -)"
+```
+
+### 読み込み
+
+```Shell-session
+$ source ~/.bash_profile
+```
+
+
+### インストールバージョンのリスト
+
+```Shell-session
+$ pyenv versions
+* system (set by $HOME/.pyenv/version)
+
+$ pyenv install --list
+```
+
+### 指定したバージョンのインストール
+
+```Shell-session
+$ pyenv install 3.9.7
+```
+
+```Shell-session
+$ pyenv global 3.9.7
+$ pyenv local 3.9.7
+
+$ python --version
+Python 3.9.7
+$ which python
+$HOME/.pyenv/shims/python
+```
+
+### pipでaws-cliのインストール
+
+```Shell-session
+$ aws --version
+aws-cli/1.21.7 Python/3.9.7 Darwin/19.6.0 botocore/1.22.7
+```
+
+PC再起動後にインストールしたバージョンを反映させる為に、dotfilesの設定を必ずする事。
+
+
+### .awsの確認
+
+*既にプロファイルが作成済みの場合
+
+*プロファイル未作成の場合.awsのディレクトリの作成とパーミッションを付与する。
+
+```Shell-session
+$ mkdir .aws
+$ chmod 766 .aws
+$ cd ~/.aws
+$ touch credentials
+```
+
+```Shell-session
+$ cat ~/.aws/credentials
+[default]
+aws_access_key_id=xxxxxxxxxxxxxxxxxxxx
+aws_secret_access_key=xxxxxxxxxxxxxxxxxxxx
+
+[profile_name]
+aws_access_key_id=xxxxxxxxxxxxxxxxxxxx
+aws_secret_access_key=xxxxxxxxxxxxxxxxxxxx
+
+$ cat ~/.aws/config
+[default]
+region=xxxxxxxxxxxxxxxxxxxx
+output=json
+
+[profile profile_name]
+region=xxxxxxxxxxxxxxxxxxxx
+```
+
+
+### プロファイルの確認
+
+```Shell-session
+$ aws configure list
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile                <not set>             None    None
+access_key     ****************XXXX shared-credentials-file
+secret_key     ****************XXXX shared-credentials-file
+    region           xx-xxxxxxxxx-1      config-file    ~/.aws/config
+```
+
+プロファイル名の指定
+
+```Shell-session
+$ aws configure list --profile profile_name
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile          　　profile_name           manual    --profile
+access_key     ****************XXXX shared-credentials-file
+secret_key     ****************XXXX shared-credentials-file
+    region           xx-xxxxxxxxx-1      config-file    ~/.aws/config
+```
+
+### プロファイルの切り替え
+
+`~/.bash_profile`に下記を追記
+
+```Shell-session
+$ vim ~/.bash_profile
+
+# aws-cli
+export AWS_PROFILE=profile_name
+
+$ source ~/.bash_profile
+```
+
+### オプションの指定無しでプロファイルの確認
+
+```Shell-session
+$ aws configure list
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile          　　profile_name           manual    --profile
+access_key     ****************XXXX shared-credentials-file
+secret_key     ****************XXXX shared-credentials-file
+    region           xx-xxxxxxxxx-1      config-file    ~/.aws/config
+```
+
+amplifyを使用する場合はamplify用のプロファイルを設定しておく事。
+
+### IAMユーザーやグループの確認
+
+```Shell-session
+$ aws iam list-users
+$ aws iam list-groups
+```
+
+### S3の確認
+
+```Shell-session
+$ aws s3 ls
+```
+
+### cloudfrontのディストリビューションの設定確認
+
+```Shell-session
+$ aws cloudfront get-distribution-config --id ${DISTRIBUTION_ID}
+```
+
+### cloudformationのスタックの確認
+
+```Shell-session
+$ aws cloudformation list-stacks
+```
+
+
+---
+
+## amplify-cliの設定
+
+### amplify-cliのインストール
+
+```Shell-session
+$ npm install -g @aws-amplify/cli
+
+$ amplify -v
+6.3.1
+```
+
+### configureの設定(AWSアカウントの紐付け)
+
+```Shell-session
+$ amplify configure
+```
+
+AWSのマネジメントコンソールを開きつつ新しいIAMユーザーを作成する。
+
+ユーザー詳細の設定、AWSアクセスの種類の設定、アクセス権限の設定、タグの設定を行う。
+
+- AWSアクセスの種類→`プログラムによるアクセス`のみを選択する。
+- アクセス権限の設定→`AdministratorAccess`や`AdministratorAccess-Amplify`を設定する。
+- タグは任意
+
+作成後にaccess_keyなどをローカルに設定してプロファイル情報を保存する。
+
+`.aws/config`、`.aws/credentials`が更新される。
+
+```Shell-session
+$ amplify configure
+Follow these steps to set up access to your AWS account:
+
+Sign in to your AWS administrator account:
+https://console.aws.amazon.com/
+Press Enter to continue
+
+Specify the AWS Region
+? region:  ap-northeast-1
+Specify the username of the new IAM user:
+? user name:  amplify-test-user
+Complete the user creation using the AWS console
+xxxxxxxxxx
+Press Enter to continue
+
+Enter the access key of the newly created user:
+? accessKeyId:  ********************
+? secretAccessKey:  ****************************************
+This would update/create the AWS Profile in your local machine
+? Profile Name:  profile_name
+
+Successfully set up the new user.
+```
+
+---
+
+## アプリケーションへのamplifyの設定
+
+初期化コマンド
+
+*実行後に作成される`amplify`ディレクトリに秘匿情報が含まれるている為、必ず`gitignore`に入れる事。
+
+
+```Shell-session
+$ amplify init
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project amplifytest
+The following configuration will be applied:
+
+Project information
+| Name: amplifytest
+| Environment: dev
+| Default editor: Visual Studio Code
+| App type: javascript
+| Javascript framework: react
+| Source Directory Path: src
+| Distribution Directory Path: build
+| Build Command: npm run-script build
+| Start Command: npm run-script start
+
+? Initialize the project with the above configuration? No
+? Enter a name for the environment dev
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you're building javascript
+Please tell us about your project
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: dist
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+Using default provider  awscloudformation
+
+? Select the authentication method you want to use: AWS profile
+
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+? Please choose the profile you want to use profile_name
+Adding backend environment dev to AWS Amplify Console app: xxxxxxxxxxx
+⠼ Initializing project in the cloud...
+
+Initialized your environment successfully.
+
+Your project has been successfully initialized and connected to the cloud!
+
+Some next steps:
+"amplify status" will show you what you've added already and if it's locally configured or deployed
+"amplify add <category>" will allow you to add features like user login or a backend API
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify console" to open the Amplify Console and view your project status
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+Pro tip:
+Try "amplify add api" to create a backend API and then "amplify publish" to deploy everything
+
+```
+
+この時点でクラウド上に`Amplify`にアプリケーションが、`CloudFormation`にスタックが、`S3`にバックエンド用のバケットが作成される。
+
+各スタックに設定されている`テンプレート`を`デザイナー`で確認する事が出来る。
+
+
+`amplify init`で行った設定はプロジェクトフォルダ内の`amplify/.config/local-env-info.json`と`amplify/.config/project-config.json`で確認出来る。
+
+
+```Shell-session
+$ cat amplify/.config/local-env-info.json
+{
+  "projectPath": "/path/amplify-test",
+  "defaultEditor": "vscode",
+  "envName": "dev"
+}
+```
+
+```Shell-session
+$ cat amplify/.config/project-config.json
+{
+  "projectName": "amplifytest",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
+```
+
+---
+
+## reactアプリケーションにamplifyを適用する
+
+
+下記のパッケージを追加する。
+
+認証関連を扱わない場合は`aws-amplify`のみで良い。
+
+```Shell-session
+$ yarn add aws-amplify aws-amplify-react
+```
+
+`amplify init`後に作成される、`/src/aws-exports.js`をts拡張子に変更する(`gitignore`にも追加)。
+
+
+### App.tsxに設定の追加
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsmobile from '@/aws-exports'
+
+// Amplifyの設定を行う
+Amplify.configure(awsmobile)
+```
+
+
+---
+
+## amplify-cliコマンド一覧
+
+### ステータスの確認
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬───────────────┬───────────┬─────────────────┐
+│ Category │ Resource name │ Operation │ Provider plugin │
+└──────────┴───────────────┴───────────┴─────────────────┘
+
+```
+
+
+### サイトの公開(ホスティングの追加)
+
+下記のコマンドでS3での静的ウェブホスティングを有効にする。
+バケット名に何も指定しない場合はデフォルトでユニークなバケットを作成する。
+
+
+```Shell-session
+$ amplify add hosting
+? Select the plugin module to execute Amazon CloudFront and S3
+? Select the environment setup: PROD (S3 with CloudFront using HTTPS)
+? hosting bucket name bucket_name
+Static webhosting is disabled for the hosting bucket when CloudFront Distribution is enabled.
+
+You can now publish your app using the following command:
+Command: amplify publish
+
+```
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ Create    │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+```
+
+この時点でクラウド上のS3,CloudFrontに影響は無い。
+
+`Select the plugin module to execute`の質問の際に`amplify`の選択肢がある。
+
+恐らく、これを選ぶとamplifyコンソール側(バックエンドをデプロイしたアプリ)にフロントエンドととしてホストされる。(未検証)
+
+
+### アプリケーションのデプロイ
+
+下記のコマンドでS3での静的ウェブホスティングを有効にする。
+バケット名に何も指定しない場合はデフォルトでユニークなバケットを作成する。
+
+事前に`amplify add hosting`を実行しておく必要がある。
+
+
+```Shell-session
+$ amplify add publish
+✔ Successfully pulled backend environment dev from the cloud.
+
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ No Change │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+? Are you sure you want to continue? Yes
+⠦ Updating resources in the cloud. This may take a few minutes...
+
+> amplify-test@0.0.0 build /path/amplify-test
+> tsc && vite build
+
+vite v2.6.7 building for production...
+✓ 2049 modules transformed.
+../dist/assets/favicon.17e50649.svg   1.49 KiB
+../dist/index.html                    0.64 KiB
+../dist/assets/index.55884c9b.js      13.36 KiB / gzip: 3.21 KiB
+../dist/assets/index.20a02549.css     17.60 KiB / gzip: 3.41 KiB
+../dist/assets/vendor.50132193.js     688.03 KiB / gzip: 188.47 KiB
+
+(!) Some chunks are larger than 500 KiB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/guide/en/#outputmanualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+frontend build command exited with code 0
+Publish started for S3AndCloudFront
+✔ Uploaded files successfully.
+Your app is published successfully.
+https://xxxxxxxxxx.cloudfront.net
+
+```
+
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name   │ Operation │ Provider plugin   │
+├──────────┼─────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront │ No Change │ awscloudformation │
+└──────────┴─────────────────┴───────────┴───────────────────┘
+
+Hosting endpoint: https://xxxxxxxxxx.cloudfront.net
+
+```
+
+Hosting endpointにアクセスするとビルドしたファイルにアクセスする事が出来る。
+
+
+`production mode`でビルドがされていない。
+
+`Environment: dev`の影響と思われる。→devtoolは反応するがprofilingが出来ないので問題無いと思われる。
+
+
+
+---
+
+## 初回publishした段階の状態
+
+1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
+2. `S3AndCloudFront`ディレクトリに内には`parameters.json`や`template.json`などs3のバケット情報やcloudformantionのスタックのテンプレートが記載されている。
+3. `aws-exports.js`に`aws_content_delivery_bucket`や`aws_content_delivery_bucket_region`、`aws_content_delivery_url`が追記される。
+4. `aws-exports.ts`には上書きされないので要注意が必要か。
+5. cloud上のamplifyコンソールにはbackendのみがデプロイされている状態である。
+6. ビルドしたフロントエンドファイルはS3&cloudfrontに置かれている為完全に別れている。(s3は別バケットになっている。cloudformationのスタックはネストされている。)
+
+
+```Shell-session
+
+```
+
+
+
+---
+
+## amplify-cliを用いた開発の流れ
+
+1. `amplify add xxx`でアプリケーションに必要なAWSのサービスを追加する。
+2. `amplify push`で追加した機能を有効化させる(CloudFrontのテンプレートファイルを更新)。
+3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
+4. `amplify delete`でinitで作成した環境を全て削除。
+
+
+```Shell-session
+
+```
+
+
+---
+
+## troubleshooting
+
+2021/11/02 現在
+
+viteでamplifyを使うと、
+下記の様な現象が見られる為
+
+
+[aws/aws-sdk-js/issues/3673](https://github.com/aws/aws-sdk-js/issues/3673)
+[getting-started/installation?platform=vue#troubleshooting](https://ui.docs.amplify.aws/ui/getting-started/installation?platform=vue#troubleshooting)
+
+
+```Shell-session
+
+```
+
+
+
+---
 
 #
