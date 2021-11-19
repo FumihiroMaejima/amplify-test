@@ -1,5 +1,3 @@
-import 'cypress'
-// import Cypress from'cypress/types'
 const targetPage = '/'
 
 describe('Root Page Test', () => {
@@ -15,6 +13,6 @@ describe('Root Page Test', () => {
     // cy.get('.p-button-raised').click('center')
 
     // ヘッダーのメッセージチェック
-    cy.get('.App-header').contains('p', 'Hello Vite + React!')
+    cy.get('.page-container').contains('h1', 'サンプル ページ')
   })
 })
