@@ -9,7 +9,7 @@
     "start": "vite preview",
     "lint": "eslint --ext .ts,.js,.tsx,.jsx --ignore-path .gitignore . --fix",
     "lint:css": "stylelint src/**/*.scss",
-    "test:unit": "node --experimental-vm-modules ./node_modules/jest --config jest.config.js",
+    "test:unit": "jest --config jest.config.js",
     "test:e2e": "cypress open --browser chrome"
   },
   "dependencies": {
