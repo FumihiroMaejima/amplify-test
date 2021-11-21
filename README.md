@@ -1180,12 +1180,48 @@ Hosting endpointにアクセスするとビルドしたファイルにアクセ�
 
 ---
 
+## amplifyプロジェクトのリポジトリをcloneした後の対応
+
+`amplify`ディレクトリなどはソース管理していない、かつ`amplify/config`などはソース管理されない様になっている為別途コマンドを打ってプロジェクト情報を取得する必要がある。
+
+```Shell-session
+$ amplify pull ${AMPLIFY_APP_ID}
+? Select the authentication method you want to use: AWS profile
+
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+? Please choose the profile you want to use profile_name
+? Which app are you working on? amplify_app_id
+Backend environment 'dev' found. Initializing...
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you're building javascript
+Please tell us about your project
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: dist
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+? Do you plan on modifying this backend? Yes
+✔ Successfully pulled backend environment dev from the cloud.
+
+
+Successfully pulled backend environment dev from the cloud.
+Run 'amplify pull' to sync future upstream changes.
+```
+
+.gitignoreが更新されてしまうので元に戻しておくこと。
+
+
+---
+
 ## amplify-cliを用いた開発の流れ
 
 1. `amplify add xxx`でアプリケーションに必要なAWSのサービスを追加する。
 2. `amplify push`で追加した機能を有効化させる(CloudFrontのテンプレートファイルを更新)。
 3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
 4. `amplify delete`でinitで作成した環境を全て削除。
+5. `amplify pull`で最新の状態の更新。
 
 
 ```Shell-session
