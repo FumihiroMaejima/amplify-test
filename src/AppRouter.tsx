@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { About } from '@/pages/About'
 import { Home } from '@/pages/Home'
 import { Sample } from '@/pages/Sample'
+import { Picsum } from '@/pages/Picsum'
 
 export const AppRouter = (): JSX.Element => {
   return (
@@ -13,6 +14,7 @@ export const AppRouter = (): JSX.Element => {
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/sample" component={Sample} />
+        <Route exact path="/picsum" component={Picsum} />
       </Switch>
     </BrowserRouter>
   )
