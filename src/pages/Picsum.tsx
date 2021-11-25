@@ -21,6 +21,11 @@ export const Picsum: React.VFC = () => {
         <PartsLabelHeading text="サンプル画像 200px * 200px" color="green" />
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
           <img src={`${baseImageHost}id/237/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/263/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/250/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/270/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/282/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/281/200/200`} alt="sample image"></img>
         </div>
 
         <PartsLabelHeading
