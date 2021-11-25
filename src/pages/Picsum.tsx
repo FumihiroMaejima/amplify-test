@@ -5,6 +5,8 @@ import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 
 export const Picsum: React.VFC = () => {
+  const baseImageHost = 'https://picsum.photos/'
+
   return (
     <div className="page-container page-container__mx-auto">
       <PartsSimpleHeading text="サンプル 画像 ページ" color="dark-grey" />
@@ -16,31 +18,34 @@ export const Picsum: React.VFC = () => {
           <p>test3</p>
         </div>
 
-        <PartsLabelHeading text="サブヘッダー2" color="red" />
+        <PartsLabelHeading text="サンプル画像 200px * 200px" color="green" />
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
-          <p>test1</p>
-          <p>test2</p>
-          <p>test3</p>
+          <img src={`${baseImageHost}id/237/200/200`} alt="sample image"></img>
         </div>
 
-        <PartsLabelHeading text="サブヘッダー3" color="green" />
-        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
-          <p>test1</p>
-          <p>test2</p>
-          <p>test3</p>
-        </div>
-
-        <PartsLabelHeading text="サブヘッダーTest" color="green" />
+        <PartsLabelHeading
+          text="グレースケール画像 200px * 200px"
+          color="green"
+        />
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
           <img
-            src="https://picsum.photos/seed/picsum/200/300"
+            src={`${baseImageHost}id/237/200/200?grayscale`}
             alt="sample image"
           ></img>
         </div>
-        <img
-          src="https://picsum.photos/id/237/200/300"
-          alt="sample image"
-        ></img>
+
+        <PartsLabelHeading text="ぼやけた画像 200px * 200px" color="green" />
+        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+          <img
+            src={`${baseImageHost}id/237/200/200?blur`}
+            alt="sample image"
+          ></img>
+        </div>
+
+        <PartsLabelHeading text="ランダム画像 200px * 200px" color="green" />
+        <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
+          <img src={`${baseImageHost}200/200?random`} alt="sample image"></img>
+        </div>
       </div>
 
       <div className="">
