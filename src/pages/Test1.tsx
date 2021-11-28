@@ -22,7 +22,8 @@ export const Test1: React.VFC = () => {
 
         <PartsLabelHeading text="サンプル画像 200px * 200px" color="green" />
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
-          <img src={`${baseImageHost}id/290/200/200`} alt="sample image"></img>
+          {/* <img src={`${baseImageHost}id/290/200/200`} alt="sample image"></img> */}
+          <img src={`${baseImageHost}id/292/200/200`} alt="sample image"></img>
         </div>
       </div>
 
