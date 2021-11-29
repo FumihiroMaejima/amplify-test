@@ -4,7 +4,7 @@ import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsCircleLoading } from '@/components/parts/PartsCircleLoading'
-import { PartsModal } from '@/components/parts/PartsModal'
+import { PartsSimpleModal } from '@/components/parts/PartsSimpleModal'
 
 export const Test1: React.VFC = () => {
   const baseImageHost = 'https://picsum.photos/'
@@ -12,7 +12,7 @@ export const Test1: React.VFC = () => {
   return (
     <div className="page-container page-container__mx-auto">
       {/* <PartsCircleLoading /> */}
-      <PartsModal />
+      <PartsSimpleModal />
       <PartsSimpleHeading text="サンプル 画像 ページ" color="dark-grey" />
       <div className="m-x2">
         <PartsLabelHeading text="サブヘッダー1" color="blue" />
