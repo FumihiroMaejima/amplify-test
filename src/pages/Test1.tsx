@@ -48,8 +48,11 @@ export const Test1: React.VFC = () => {
         </div>
 
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
-          <PartsSimpleButton text="blue" color="blue" />
-          <button onClick={openModalHandler}>test button</button>
+          <PartsSimpleButton
+            text="blue"
+            color="blue"
+            onClick={openModalHandler}
+          />
         </div>
 
         <PartsLabelHeading text="サンプル画像 200px * 200px" color="green" />

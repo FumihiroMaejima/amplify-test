@@ -8,7 +8,7 @@ type Props = {
 export const PartsSimpleModal: React.VFC<Props> = ({
   isOpen = false,
   closeModalHandler = () => {
-    console.log('default')
+    console.log('default click')
   },
 }) => {
   return (
