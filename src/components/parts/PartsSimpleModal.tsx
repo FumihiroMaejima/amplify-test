@@ -2,9 +2,15 @@ import React from 'react'
 
 type Props = {
   isOpen: boolean
+  closeModalHandler: () => void
 }
 
-export const PartsSimpleModal: React.VFC<Props> = ({ isOpen = false }) => {
+export const PartsSimpleModal: React.VFC<Props> = ({
+  isOpen = false,
+  closeModalHandler = () => {
+    console.log('default')
+  },
+}) => {
   return (
     <div
       className={`parts-simple-modal ${
@@ -20,7 +26,10 @@ export const PartsSimpleModal: React.VFC<Props> = ({ isOpen = false }) => {
           <div className="parts-simple-modal__content-head">
             <h1>modal header</h1>
           </div>
-          <button className="parts-simple-modal__close">
+          <button
+            className="parts-simple-modal__close"
+            onClick={closeModalHandler}
+          >
             <svg className="" viewBox="0 0 24 24">
               <path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z" />
               <path d="M0 0h24v24h-24z" fill="none" />
