@@ -1,25 +1,20 @@
 import React from 'react'
 
-/* type Props = {
-  open: boolean
-} */
-
 type Props = {
   isOpen: boolean
 }
 
-// export const PartsSimpleModal: React.VFC<Props> = ({ isOpen = false }) => {
-export const PartsSimpleModal: React.VFC<Props> = (props) => {
+export const PartsSimpleModal: React.VFC<Props> = ({ isOpen = false }) => {
   return (
     <div
       className={`parts-simple-modal ${
-        props.isOpen ? 'parts-simple-modal--active' : ''
+        isOpen ? 'parts-simple-modal--active' : ''
       }`}
     >
       <div className="parts-simple-modal__dialog">
         <div
           className={`parts-simple-modal__content ${
-            props.isOpen ? 'parts-simple-modal__content--active' : ''
+            isOpen ? 'parts-simple-modal__content--active' : ''
           }`}
         >
           <div className="parts-simple-modal__content-head">
