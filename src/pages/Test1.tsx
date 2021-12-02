@@ -4,7 +4,7 @@ import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsCircleLoading } from '@/components/parts/PartsCircleLoading'
-import { PartsSimpleModal } from '@/components/parts/PartsSimpleModal'
+import { PartsSimpleModal } from '@/components/parts/modal/PartsSimpleModal'
 
 export const Test1: React.VFC = () => {
   const baseImageHost = 'https://picsum.photos/'
