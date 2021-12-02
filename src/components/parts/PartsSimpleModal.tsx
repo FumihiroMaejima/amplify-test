@@ -2,11 +2,13 @@ import React from 'react'
 
 type Props = {
   isOpen: boolean
+  hideOnClickOutSide?: boolean
   closeModalHandler: () => void
 }
 
 export const PartsSimpleModal: React.VFC<Props> = ({
   isOpen = false,
+  hideOnClickOutSide = false,
   closeModalHandler = () => {
     console.log('default click')
   },
@@ -16,6 +18,7 @@ export const PartsSimpleModal: React.VFC<Props> = ({
       className={`parts-simple-modal ${
         isOpen ? 'parts-simple-modal--active' : ''
       }`}
+      onClick={hideOnClickOutSide ? closeModalHandler : undefined}
     >
       <div className="parts-simple-modal__dialog">
         <div

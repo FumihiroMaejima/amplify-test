@@ -36,6 +36,7 @@ export const Test1: React.VFC = () => {
       {/* <PartsCircleLoading /> */}
       <PartsSimpleModal
         isOpen={isOpenModal}
+        hideOnClickOutSide={true}
         closeModalHandler={changeOpenModalValueHandler}
       />
       <PartsSimpleHeading text="サンプル 画像 ページ" color="dark-grey" />
@@ -49,7 +50,7 @@ export const Test1: React.VFC = () => {
 
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
           <PartsSimpleButton
-            text="blue"
+            text="modal"
             color="blue"
             onClick={openModalHandler}
           />
@@ -59,7 +60,8 @@ export const Test1: React.VFC = () => {
         <div className="util-text__contents-area util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p util-color__text--dark-grey">
           {/* <img src={`${baseImageHost}id/290/200/200`} alt="sample image"></img> */}
           <img src={`${baseImageHost}id/292/200/200`} alt="sample image"></img>
-          <img src={`${baseImageHost}id/295/200/200`} alt="sample image"></img>
+          {/* <img src={`${baseImageHost}id/295/200/200`} alt="sample image"></img> */}
+          <img src={`${baseImageHost}id/299/200/200`} alt="sample image"></img>
         </div>
       </div>
 
