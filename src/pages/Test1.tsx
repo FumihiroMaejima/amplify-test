@@ -4,6 +4,7 @@ import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsCircleLoading } from '@/components/parts/PartsCircleLoading'
+import { PartsSimpleCarousel } from '@/components/parts/carousel/PartsSimpleCarousel'
 import { PartsSimpleModal } from '@/components/parts/modal/PartsSimpleModal'
 
 export const Test1: React.VFC = () => {
@@ -64,7 +65,11 @@ export const Test1: React.VFC = () => {
           {/* <img src={`${baseImageHost}id/299/200/200`} alt="sample image"></img>
           <img src={`${baseImageHost}id/300/200/200`} alt="sample image"></img> */}
           <img src={`${baseImageHost}id/301/200/200`} alt="sample image"></img>
-          <img src={`${baseImageHost}id/306/200/200`} alt="sample image"></img>
+          <img src={`${baseImageHost}id/307/200/200`} alt="sample image"></img>
+        </div>
+
+        <div>
+          <PartsSimpleCarousel />
         </div>
       </div>
 
