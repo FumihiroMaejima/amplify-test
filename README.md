@@ -1167,6 +1167,119 @@ Hosting endpointにアクセスするとビルドしたファイルにアクセ�
 
 ---
 
+## 認証機能の追加
+
+下記のコマンドでローカルに認証機能を追加する。
+
+認証方法ははユーザー名、電話番号、emailなどから選択出来る。
+
+```Shell-session
+$ amplify add auth
+
+Using service: Cognito, provided by: awscloudformation
+
+ The current configured provider is Amazon Cognito.
+
+ Do you want to use the default authentication and security configurati
+on? Default configuration
+ Warning: you will not be able to edit these selections.
+ How do you want users to be able to sign in? Username
+ Do you want to configure advanced settings? No, I am done.
+✅ Successfully added auth resource ${resouce_name} locally
+
+✅ Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+```
+
+認証機能をcloudに追加(push)する。
+
+```Shell-session
+$ amplify push
+⠦ Fetching updates to backend environment: dev from the cloud.⠋ Buildin✔ Successfully pulled backend environment dev from the cloud.
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ resource_name       │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+? Are you sure you want to continue? Yes
+⠴ Updating resources in the cloud. This may take a few minutes...
+
+UPDATE_IN_PROGRESS ${project_name} AWS::CloudFormation::Stack Thu Dec 16 2021 00:22:50 GMT+0900 (日本標準時) User Initiated
+⠋ Updating resources in the cloud. This may take a few minutes...
+
+```
+
+push後はcloudのS3などの各サービスが更新されている。
+また、下記のサービスに設定が新規追加されている
+
+`Lambda`: 関数が2つ追加されている。
+
+`Cognite`: ユーザープール、IDプールが作成される。
+
+
+statusは下記の通りに変わる。
+
+````Shell-session
+amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ resource_name       │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+```
+
+`aws-amplify-react`を追加する。(`aws-amplify`をインストールしていない場合は一緒にインストールする。)
+
+認証関連を扱わない場合は`aws-amplify`のみで良い。
+
+```Shell-session
+$ yarn add aws-amplify aws-amplify-react
+```
+
+2021年12月現在、`aws-amplify-react`はregacy扱いになっている...。
+
+新規の`@aws-amplify/ui-react`を代わりに使う。
+
+[Amplify Docs](https://docs.amplify.aws/ui/q/framework/react/)
+
+[Amplify UI](https://ui.docs.amplify.aws/)
+
+[aws-amplify/amplify-ui](https://github.com/aws-amplify/amplify-ui)
+
+
+```Shell-session
+$ yarn add aws-amplify @aws-amplify/ui-react
+```
+
+まだまだバグが多いのでレガシーのものを使う。
+
+### App.tsxに設定の追加
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import { withAuthenticator } from 'aws-amplify-react'
+import awsmobile from '@/aws-exports'
+
+// Amplifyの設定を行う
+Amplify.configure(awsmobile)
+```
+
+
+---
+
+
 ## 初回publishした段階の状態
 
 1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
