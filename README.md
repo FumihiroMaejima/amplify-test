@@ -1031,10 +1031,10 @@ $ yarn add aws-amplify aws-amplify-react
 ```TypeScript
 import React, { useState } from 'react'
 import Amplify from 'aws-amplify'
-import awsmobile from '@/aws-exports'
+import awsConfig from '@/aws-exports'
 
 // Amplifyの設定を行う
-Amplify.configure(awsmobile)
+Amplify.configure(awsConfig)
 ```
 
 
@@ -1225,8 +1225,8 @@ push後はcloudのS3などの各サービスが更新されている。
 
 statusは下記の通りに変わる。
 
-````Shell-session
-amplify status
+```Shell-session
+$ amplify status
 
     Current Environment: dev
 
@@ -1258,22 +1258,46 @@ $ yarn add aws-amplify aws-amplify-react
 [aws-amplify/amplify-ui](https://github.com/aws-amplify/amplify-ui)
 
 
+yarn addして使おうとしたが、cssの読み込みが上手く行かなかった。
+
+`@aws-amplify/ui-react`は親の`@aws-amplify/ui`を参照しているのでこちらもインストールする必要がある。(viteだけ？)
+
 ```Shell-session
-$ yarn add aws-amplify @aws-amplify/ui-react
+$ yarn add @aws-amplify/ui
 ```
 
-まだまだバグが多いのでレガシーのものを使う。
+結局下記の３つをインストールすることになる。
+
+```Shell-session
+$ yarn add aws-amplify @aws-amplify/ui-react @aws-amplify/ui
+```
+
 
 ### App.tsxに設定の追加
+
+最小限の設定としては下記の様な形
 
 ```TypeScript
 import React, { useState } from 'react'
 import Amplify from 'aws-amplify'
-import { withAuthenticator } from 'aws-amplify-react'
-import awsmobile from '@/aws-exports'
+import awsConfig from '@/aws-exports'
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
 
 // Amplifyの設定を行う
-Amplify.configure(awsmobile)
+Amplify.configure(awsConfig)
+
+function App() {
+  return (
+    <Authenticator>
+      {({ signOut, user }) => (
+        <div className="app">
+          <!-- main contents -->
+        </div>
+      )}
+    </Authenticator>
+  )
+}
 ```
 
 
