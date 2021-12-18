@@ -4,6 +4,8 @@ import {
   SignUpParams,
   SignInOpts,
   SignOutOpts,
+  CurrentUserOpts,
+  // ClientMetaData,
 } from '@aws-amplify/auth/lib-esm/types'
 import { CognitoUser } from 'amazon-cognito-identity-js'
 // import { Authenticator } from '@aws-amplify/ui-react'
@@ -74,4 +76,122 @@ export async function amplifySignOut(
     console.log('error signing out:', error)
     throw error as never
   }
+}
+
+/* Password & user management */
+
+/**
+ * amplify current authenticated user function.
+ * @param {boolean} bypassCache - true, this call will send a request to Cognito to get the latest user data
+ * @return {Promise<CognitoUser>}
+ */
+export async function amplifyCurrentUser(
+  bypassCache = false
+): Promise<CognitoUser> {
+  try {
+    const user: CognitoUser = await Auth.currentAuthenticatedUser({
+      bypassCache,
+    } as CurrentUserOpts)
+
+    console.log('success current user:', JSON.stringify(user, null, 2))
+    return user
+  } catch (error: unknown) {
+    console.log('error current user:', error)
+    throw error as never
+  }
+}
+
+/**
+ * amplify change password function.
+ * @param {string} oldPassword
+ * @param {string} newPassword
+ * @return {Promise<CognitoUser>}
+ */
+export async function amplifyChangePassword(
+  oldPassword: string,
+  newPassword: string
+): Promise<boolean> {
+  try {
+    return await Auth.currentAuthenticatedUser()
+      .then((user: CognitoUser) => {
+        return Auth.changePassword(user, oldPassword, newPassword).then(() => {
+          return true
+        })
+      })
+      .catch((error: unknown) => {
+        console.log('error change password:', error)
+        throw error as never
+      })
+  } catch (error: unknown) {
+    console.log('error current user:', error)
+    throw error as never
+  }
+}
+
+/**
+ * amplify forgot password function.
+ * @param {string} username
+ * @return {Promise<boolean>}
+ */
+export async function amplifyForgotPassword(
+  username: string
+): Promise<boolean> {
+  try {
+    // Send confirmation code to user's email
+    await Auth.forgotPassword(username).then((res: any) => {
+      console.log('success forgot password:', res)
+    })
+    return true
+  } catch (error: unknown) {
+    console.log('error forgot password:', error)
+    throw error as never
+  }
+}
+
+/**
+ * amplify forgot password submit function.
+ * @param {string} username
+ * @param {string} code - confirmation code
+ * @param {string} newPassword
+ * @return {Promise<boolean>}
+ */
+export async function amplifyForgotPasswordSubmit(
+  username: string,
+  code: string,
+  newPassword: string
+): Promise<boolean> {
+  try {
+    // Collect confirmation code and new password, then
+    await Auth.forgotPasswordSubmit(username, code, newPassword).then(
+      (res: string) => {
+        console.log('success forgot password submit:', res)
+      }
+    )
+    return true
+  } catch (error: unknown) {
+    console.log('error forgot password submit:', error)
+    throw error as never
+  }
+}
+
+/**
+ * amplify complete change  to new password function.
+ * @param {string} username
+ * @param {string} newPassword
+ * @return {Promise<CognitoUser>}
+ */
+export async function amplifyCompleteNewPassword(
+  username: string,
+  newPassword: string
+): Promise<boolean> {
+  return await Auth.signIn(username, newPassword)
+    .then((user: CognitoUser) => {
+      /* if (user.cha) {
+      } */
+      return true
+    })
+    .catch((error: unknown) => {
+      console.log('error current user:', error)
+      throw error as never
+    })
 }
