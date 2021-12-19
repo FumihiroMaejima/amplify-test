@@ -12,7 +12,8 @@ I18n.setLanguage('ja')
 // import logo from '@/assets/img/logo.svg'
 import { AppRouter } from '@/AppRouter'
 import { GlobalFooter } from '@/components/_global/GlobalFooter'
-import { GlobalHeader } from '@/components/_global/GlobalHeader'
+// import { GlobalHeader } from '@/components/_global/GlobalHeader'
+import { AuthGlobalHeader } from '@/components/_global/AuthGlobalHeader'
 // import '@/assets/scss/App.scss'
 
 // Amplifyの設定を行う
@@ -25,7 +26,8 @@ function App() {
     <Authenticator variation="modal">
       {({ signOut, user }) => (
         <div className="app">
-          <GlobalHeader />
+          {/* <GlobalHeader /> */}
+          <AuthGlobalHeader signOut={signOut} />
           <div className="app-content">
             <AppRouter />
           </div>
