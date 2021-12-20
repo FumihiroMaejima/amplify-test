@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Amplify, { I18n } from 'aws-amplify'
 import awsConfig from '@/aws-exports'
-import { Authenticator } from '@aws-amplify/ui-react'
+import { Authenticator, View } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 
 // 日本語化対応
@@ -22,8 +22,18 @@ Amplify.configure(awsConfig)
 function App() {
   const [count, setCount] = useState(0)
 
+  // 認証フォームコンポーネントの拡張設定
+  const components = {
+    // sign up コンポーネントのフォームを設定しない事で入力を防ぐ
+    SignUp: {
+      FormFields() {
+        return <View textAlign="center"></View>
+      },
+    },
+  }
+
   return (
-    <Authenticator variation="modal">
+    <Authenticator variation="modal" components={components}>
       {({ signOut, user }) => (
         <div className="app">
           {/* <GlobalHeader /> */}

@@ -22,6 +22,10 @@
 @import './components/parts/table/PartsLabelTable.scss';
 @import './components/parts/table/PartsSimpleTable.scss';
 
+
+/* plugins */
+@import './plugins/amplify.scss';
+
 /* util */
 @import './util/border.scss';
 @import './util/colors.scss';
