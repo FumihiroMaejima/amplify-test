@@ -24,6 +24,12 @@ function App() {
 
   // 認証フォームコンポーネントの拡張設定
   const components = {
+    // パスワードリセットフォームでの入力を防ぐ
+    SignIn: {
+      Footer() {
+        return <View textAlign="center">*パスワードリセットは出来ません。</View>
+      },
+    },
     // sign up コンポーネントのフォームを設定しない事で入力を防ぐ
     SignUp: {
       FormFields() {
