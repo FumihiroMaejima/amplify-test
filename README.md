@@ -1303,6 +1303,78 @@ function App() {
 
 ---
 
+### デフォルトの機能の修正
+
+- 日本語設定
+- sign out機能ハンドラー設定
+- sign up機能の非表示化
+- password reset機能の非表示化
+
+最小限の設定としては下記の様な形
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsConfig from '@/aws-exports'
+import { Authenticator, View } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
+// 日本語化対応
+import { translations } from '@aws-amplify/ui'
+I18n.putVocabularies(translations)
+I18n.setLanguage('ja')
+
+import { AppRouter } from '@/AppRouter'
+import { GlobalFooter } from '@/components/_global/GlobalFooter'
+import { AuthGlobalHeader } from '@/components/_global/AuthGlobalHeader'
+
+// Amplifyの設定を行う
+Amplify.configure(awsConfig)
+
+function App() {
+  // 認証フォームコンポーネントの拡張設定
+  const components = {
+    // パスワードリセットフォームでの入力を防ぐ
+    SignIn: {
+      Footer() {
+        return <View textAlign="center">*パスワードリセットは出来ません。</View>
+      },
+    },
+    // sign up コンポーネントのフォームを設定しない事で入力を防ぐ
+    SignUp: {
+      FormFields() {
+        return <View textAlign="center"></View>
+      },
+    },
+  }
+
+  return (
+    <Authenticator variation="modal" components={components}>
+      {({ signOut, user }) => (
+        <div className="app">
+          <AuthGlobalHeader signOut={signOut} />
+          <div>
+            <!-- main contents -->
+          </div>
+        </div>
+      )}
+    </Authenticator>
+  )
+}
+
+export default App
+
+```
+
+signIn & signUpのタブを非表示にする為に下記のCSS設定を追加する。
+
+```scss
+.amplify-tabs {
+  display: none !important;
+}
+```
+
+---
 
 ## 初回publishした段階の状態
 
