@@ -1376,6 +1376,99 @@ signIn & signUpのタブを非表示にする為に下記のCSS設定を追加�
 
 ---
 
+## APIの追加
+
+```Shell-session
+$ amplify add api
+
+? Select from one of the below mentioned services: GraphQL
+? Here is the GraphQL API that we will create. Select a setting to edit
+ or continue Continue
+? Choose a schema template: Single object with fields (e.g., “Todo” wit
+h ID, name, description)
+
+The following types do not have '@auth' enabled. Consider using @auth with @model
+         - Todo
+Learn more about @auth here: https://docs.amplify.aws/cli-legacy/graphql-transformer/auth
+
+GraphQL schema compiled successfully.
+
+Edit your schema at /path/project/amplify/backend/api/amplifytest/schema.graphql or place .graphql files in a directory at /path/project/amplify/backend/api/amplifytest/schema
+✔ Do you want to edit the schema now? (Y/n) · no
+✅ Successfully added resource ${project_name} locally
+
+✅ Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+```
+
+statusの確認
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Api      │ project_name        │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ project_name_id     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+
+Hosting endpoint: https://xxxxxxxxxx.cloudfront.net
+
+```
+
+### backendのpush
+
+
+```Shell-session
+$ amplify push
+⠦ Fetching updates to backend environment: dev from the cloud.⠋ Buildin⠙ Building resource api/project_name
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Api      │ project_name        │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ project_name_id     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+? Are you sure you want to continue? Yes
+? Do you want to generate code for your newly created GraphQL API Yes
+? Choose the code generation language target typescript
+? Enter the file name pattern of graphql queries, mutations and subscri
+ptions src/graphql/**/*.ts
+? Do you want to generate/update all possible GraphQL operations - quer
+ies, mutations and subscriptions Yes
+? Enter maximum statement depth [increase from default if your schema i
+s deeply nested] 2
+? Enter the file name for the generated code src/API.ts
+⠼ Updating resources in the cloud. This may take a few minutes...
+
+
+GraphQL endpoint: https://xxxxxxxxx.appsync-api.ap-northeast-1.amazonaws.com/graphql
+GraphQL API KEY: xxxxxxxxxxxxxxx
+
+```
+
+cloud上ではAppSyncとDynamoDBに当プロジェクトの設定が追加される。
+
+ちなみ、`amplify push`をしただけではフロントエンドの設定(新規追加した認証機能など)は最新に更新されない。
+
+`amplify publish`をしないとビルドされないっぽい。
+
+
+---
+
 ## 初回publishした段階の状態
 
 1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
