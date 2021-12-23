@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Amplify, { I18n } from 'aws-amplify'
+import Amplify, { I18n, API, graphqlOperation } from 'aws-amplify'
 import awsConfig from '@/aws-exports'
 import { Authenticator, View } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
@@ -9,15 +9,59 @@ import { translations } from '@aws-amplify/ui'
 I18n.putVocabularies(translations)
 I18n.setLanguage('ja')
 
-// import logo from '@/assets/img/logo.svg'
 import { AppRouter } from '@/AppRouter'
 import { GlobalFooter } from '@/components/_global/GlobalFooter'
 // import { GlobalHeader } from '@/components/_global/GlobalHeader'
 import { AuthGlobalHeader } from '@/components/_global/AuthGlobalHeader'
-// import '@/assets/scss/App.scss'
+
+import { createTodo, updateTodo, deleteTodo } from '@/graphql/mutations'
+import { listTodos } from '@/graphql/queries'
+import { onCreateTodo } from '@/graphql/subscriptions'
+import Observable from 'zen-observable-ts'
 
 // Amplifyの設定を行う
 Amplify.configure(awsConfig)
+
+// GraphQL設定
+// ------------------------------------------------
+
+const todo = { name: 'My first todo', description: 'Hello world!' }
+const todoId = 1
+
+// mutation
+
+// create
+await API.graphql(graphqlOperation(createTodo, { input: todo }))
+
+// update
+await API.graphql(
+  graphqlOperation(updateTodo, {
+    input: { id: todoId, name: 'Updated todo info' },
+  })
+)
+
+// delete
+await API.graphql(graphqlOperation(deleteTodo, { input: { id: todoId } }))
+
+// queries
+const todos = await API.graphql(graphqlOperation(listTodos))
+
+// subscriptions
+// Subscribe to creation of Todo
+const subscribeResult = API.graphql(
+  graphqlOperation(onCreateTodo)
+) as Observable<typeof todo>
+const subscription = subscribeResult.subscribe({
+  next: (todoData) => {
+    console.log(todoData)
+    // Do something with the data
+  },
+})
+
+// Stop receiving data updates from the subscription
+subscription.unsubscribe()
+
+// ------------------------------------------------
 
 function App() {
   const [count, setCount] = useState(0)

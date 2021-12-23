@@ -1469,6 +1469,15 @@ cloud上ではAppSyncとDynamoDBに当プロジェクトの設定が追加され
 
 ---
 
+## backendにリクエスト送る。
+
+
+```Shell-session
+yarn add @aws-amplify/api @aws-amplify/api-graphql
+```
+
+---
+
 ## 初回publishした段階の状態
 
 1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
@@ -1529,6 +1538,7 @@ Run 'amplify pull' to sync future upstream changes.
 3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
 4. `amplify delete`でinitで作成した環境を全て削除。
 5. `amplify pull`で最新の状態の更新。
+6. `amplify console`でブラウザのaws コンソール画面を開く(Amplify Studioも選べる)。
 
 
 ```Shell-session
