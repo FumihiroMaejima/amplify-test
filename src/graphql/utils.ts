@@ -18,7 +18,7 @@ const todoId = 1
  * @return {Promise<void>}
  */
 export const queryApi = async <T = Record<string, unknown>>(
-  query: any,
+  query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
 ): Promise<GraphQLResult<T>> => {
@@ -39,7 +39,7 @@ export const queryApi = async <T = Record<string, unknown>>(
  * @return {Promise<void>}
  */
 export const createApi = async (
-  query: any,
+  query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
 ): Promise<void> => {
@@ -55,7 +55,7 @@ export const createApi = async (
  * @return {Promise<void>}
  */
 export const updateApi = async (
-  query: any,
+  query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
 ): Promise<void> => {
@@ -75,7 +75,7 @@ export const updateApi = async (
  * @return {Promise<void>}
  */
 export const deleteApi = async (
-  query: any,
+  query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
 ): Promise<void> => {
@@ -91,7 +91,7 @@ export const deleteApi = async (
  * @return {Promise<void>}
  */
 export const subscriptionApi = async <T = Record<string, unknown>>(
-  query: any,
+  query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
 ): Promise<void> => {
