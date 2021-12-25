@@ -21,7 +21,7 @@ import { listTodos } from '@/graphql/queries'
 Amplify.configure(awsConfig)
 
 // DynamoDBのデータの取得
-const queryData = queryApi<Record<'id', number>>(listTodos)
+// const queryData = queryApi<Record<'id', number>>(listTodos)
 
 function App() {
   const [count, setCount] = useState(0)
