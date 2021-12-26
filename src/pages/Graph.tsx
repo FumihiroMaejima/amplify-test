@@ -35,7 +35,19 @@ const simpleTableData: SimpleTableDataType[] = [
 export const Graph: React.VFC = () => {
   // DynamoDBのデータの取得
   // WARN ここで実行すると2回リクエストを実行する
-  // const queryData = queryApi<Record<'id', number>>(listTodos)
+  /* const queryData = queryApi<Record<'id', number>>(listTodos).then((res) => {
+    console.log('then: ' + JSON.stringify(res, null, 2))
+  }) */
+  const [todos, setTodo] = useState(0)
+
+  const created = async () => {
+    const queryData = await queryApi<Record<'id', number>>(listTodos)
+    console.log('queryData: ' + JSON.stringify(queryData, null, 2))
+  }
+  created()
+
+  // const test1 = React.Component
+  // console.log('test1: ' + JSON.stringify(queryData, null, 2))
 
   return (
     <div className="page-container page-container__mx-auto">

@@ -21,15 +21,55 @@ export const queryApi = async <T = Record<string, unknown>>(
   query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
-): Promise<GraphQLResult<T>> => {
+): Promise<T | undefined> => {
   // queries
   // const todos = await API.graphql(graphqlOperation(listTodos))
   // const todos = await API.graphql(graphqlOperation(query, variables))
 
   // Promise<GraphQLResult<object>>型の値を返す
-  return (await API.graphql(graphqlOperation(query, variables))) as Promise<
+
+  try {
+    const response = (await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
+
+    // console.log('response: ' + JSON.stringify(response, null, 2))
+    return (await response).data
+  } catch (error: unknown) {
+    throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+  }
+
+  /* try {
+    return await API.graphql(graphqlOperation(query, variables)).then(
+      (res: GraphQLResult<T>) => {
+        return res.data
+      }
+    )
+
+    // console.log('response: ' + JSON.stringify(response, null, 2))
+    // return  await response.data
+  } catch (error: unknown) {
+    throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+  } */
+
+  /* const result = (await API.graphql(
+    graphqlOperation(query, variables)
+  )) as Promise<GraphQLResult<T>>
+
+  return await result
+    .then((response) => {
+      console.log('response: ' + JSON.stringify(response, null, 2))
+      return response
+    })
+    .catch((error: unknown) => {
+      throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+    }) */
+
+  /* console.log('result: ' + JSON.stringify(result, null, 2))
+  return result */
+  /* return (await API.graphql(graphqlOperation(query, variables))) as Promise<
     GraphQLResult<T>
-  >
+  > */
 }
 
 /**
