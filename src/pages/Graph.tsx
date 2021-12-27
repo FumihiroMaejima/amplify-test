@@ -32,22 +32,50 @@ const simpleTableData: SimpleTableDataType[] = [
   { label1: 'v7', label2: 'v8', label3: 'v9' },
 ]
 
+type TodoType = {
+  id: string
+  name: string
+  description: string
+  createdAt: string
+  updatedAt: string
+}
+
+type TodoListType = TodoType[]
+
+const getInitialData = async (): Promise<TodoListType> => {
+  const queryData = await queryApi<
+    Record<'listTodos', Record<'items', TodoListType>>
+  >(listTodos)
+  console.log('queryData: ' + JSON.stringify(queryData, null, 2))
+  return queryData?.listTodos.items || []
+}
+
+const testData = getInitialData
+
 export const Graph: React.VFC = () => {
   // DynamoDBのデータの取得
   // WARN ここで実行すると2回リクエストを実行する
   /* const queryData = queryApi<Record<'id', number>>(listTodos).then((res) => {
     console.log('then: ' + JSON.stringify(res, null, 2))
   }) */
-  const [todos, setTodo] = useState(0)
+
+  /* const [todos, setTodo] = useState([] as TodoListType)
 
   const created = async () => {
-    const queryData = await queryApi<Record<'id', number>>(listTodos)
+    const queryData = await queryApi<
+      Record<'listTodos', Record<'items', TodoListType>>
+    >(listTodos)
     console.log('queryData: ' + JSON.stringify(queryData, null, 2))
-  }
-  created()
+    setTodo(queryData?.listTodos.items || [])
+  } */
+
+  // const [todos, setTodo] = useState(getInitialData)
+  const [todos, setTodo] = useState(testData)
 
   // const test1 = React.Component
   // console.log('test1: ' + JSON.stringify(queryData, null, 2))
+
+  // WARN ここにAPIコールを実行するメソッドを定義してそのまま実行する1回のリクエストでは済まなく、無限リクエストを送ることになる。
 
   return (
     <div className="page-container page-container__mx-auto">
@@ -57,6 +85,9 @@ export const Graph: React.VFC = () => {
         isDashed={false}
         isDouble={false}
       />
+      {/* {todos.map((todo: TodoType, i) => (
+        <li key={i}>{todo}</li>
+      ))} */}
 
       <div className="m-xy2">
         <PartsTitleBox text="title box" isDashed={false} />
