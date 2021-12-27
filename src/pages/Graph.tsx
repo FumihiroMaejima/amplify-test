@@ -59,16 +59,18 @@ const getInitialData = async (): Promise<TodoListType> => {
 }
 
 export const Graph: React.VFC = () => {
-  const [todos, setTodo] = useState([] as TodoListType)
+  const [todos, setTodo] = useState<TodoListType>([])
 
-  useEffect(() => {
+  // mount後に実行する処理
+  const onDidMount = (): (() => void) => {
     getInitialData().then((data) => {
       setTodo(data)
     })
     return () => {
       console.log('clean up')
     }
-  }, [])
+  }
+  useEffect(onDidMount, [])
 
   return (
     <div className="page-container page-container__mx-auto">
