@@ -32,6 +32,14 @@ const simpleTableData: SimpleTableDataType[] = [
   { label1: 'v7', label2: 'v8', label3: 'v9' },
 ]
 
+const todoTableHeaderData: TableHeaderType[] = [
+  { label: 'id' },
+  { label: '名前' },
+  { label: '詳細' },
+  { label: '作成日時' },
+  { label: '更新日時' },
+]
+
 type TodoType = {
   id: string
   name: string
@@ -90,7 +98,10 @@ export class Graph extends Component {
         <PartsLabelHeading text="ヘッダー" />
 
         <div className="m-xy2">
-          <PartsStickyNoteList items={[1, 2, 3, 4, 5]} />
+          <PartsSimpleTable
+            headers={todoTableHeaderData}
+            items={this.state.content}
+          />
         </div>
 
         <div className="m-xy2">
