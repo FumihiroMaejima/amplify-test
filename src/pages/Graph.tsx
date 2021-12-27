@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Component } from 'react'
 import { Link } from 'react-router-dom'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
@@ -50,75 +50,61 @@ const getInitialData = async (): Promise<TodoListType> => {
   return queryData?.listTodos.items || []
 }
 
-const testData = getInitialData
+export class Graph extends Component {
+  public state = {
+    posts: [],
+    content: [] as TodoListType,
+  }
 
-export const Graph: React.VFC = () => {
-  // DynamoDBのデータの取得
-  // WARN ここで実行すると2回リクエストを実行する
-  /* const queryData = queryApi<Record<'id', number>>(listTodos).then((res) => {
-    console.log('then: ' + JSON.stringify(res, null, 2))
-  }) */
+  async componentDidMount(): Promise<void> {
+    // this.state.content = await getInitialData()
+    this.setState({ content: await getInitialData() })
+  }
 
-  /* const [todos, setTodo] = useState([] as TodoListType)
-
-  const created = async () => {
-    const queryData = await queryApi<
-      Record<'listTodos', Record<'items', TodoListType>>
-    >(listTodos)
-    console.log('queryData: ' + JSON.stringify(queryData, null, 2))
-    setTodo(queryData?.listTodos.items || [])
-  } */
-
-  // const [todos, setTodo] = useState(getInitialData)
-  const [todos, setTodo] = useState(testData)
-
-  // const test1 = React.Component
-  // console.log('test1: ' + JSON.stringify(queryData, null, 2))
-
-  // WARN ここにAPIコールを実行するメソッドを定義してそのまま実行する1回のリクエストでは済まなく、無限リクエストを送ることになる。
-
-  return (
-    <div className="page-container page-container__mx-auto">
-      <PartsSimpleHeading
-        text="GraphQLテストページ"
-        color="dark-grey"
-        isDashed={false}
-        isDouble={false}
-      />
-      {/* {todos.map((todo: TodoType, i) => (
-        <li key={i}>{todo}</li>
-      ))} */}
-
-      <div className="m-xy2">
-        <PartsTitleBox text="title box" isDashed={false} />
-      </div>
-
-      <div className="m-xy2">
-        <PartsSimpleButton text="button text" />
-        <PartsSimpleButton text="black" color="black" />
-        <PartsSimpleButton text="blue" color="blue" />
-        <PartsSimpleButton text="red" color="red" />
-        <PartsSimpleButton text="green" color="green" />
-        <PartsSimpleButton text="white" color="white" />
-      </div>
-
-      <PartsLabelHeading text="ヘッダー" />
-
-      <div className="m-xy2">
-        <PartsStickyNoteList items={[1, 2, 3, 4, 5]} />
-      </div>
-
-      <div className="m-xy2">
-        <PartsSimpleTable
-          headers={simpleTableHeaderData}
-          items={simpleTableData}
+  render(): JSX.Element {
+    return (
+      <div className="page-container page-container__mx-auto">
+        <PartsSimpleHeading
+          text="GraphQLテストページ"
+          color="dark-grey"
+          isDashed={false}
+          isDouble={false}
         />
+        {this.state.content.map((todo: TodoType, i) => (
+          <p key={i}>{todo.name}</p>
+        ))}
+
+        <div className="m-xy2">
+          <PartsTitleBox text="title box" isDashed={false} />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleButton text="button text" />
+          <PartsSimpleButton text="black" color="black" />
+          <PartsSimpleButton text="blue" color="blue" />
+          <PartsSimpleButton text="red" color="red" />
+          <PartsSimpleButton text="green" color="green" />
+          <PartsSimpleButton text="white" color="white" />
+        </div>
+
+        <PartsLabelHeading text="ヘッダー" />
+
+        <div className="m-xy2">
+          <PartsStickyNoteList items={[1, 2, 3, 4, 5]} />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTable
+            headers={simpleTableHeaderData}
+            items={simpleTableData}
+          />
+        </div>
+        <div className="m-y2">
+          <Link to={`/`}>Go To Home</Link>
+        </div>
       </div>
-      <div className="m-y2">
-        <Link to={`/`}>Go To Home</Link>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Graph
