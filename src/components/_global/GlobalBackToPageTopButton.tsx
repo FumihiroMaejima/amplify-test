@@ -1,10 +1,10 @@
 import React, { MouseEventHandler, useEffect, useState } from 'react'
 
 type Props = {
-  showPosition: number
+  showPosition?: number
 }
 
-export const BackToPageTopButton: React.VFC<Props> = ({
+export const GlobalBackToPageTopButton: React.VFC<Props> = ({
   showPosition = 100, //ボタンを表示させ始める位置
 }) => {
   const [isButtonActive, setIsButtonActive] = useState(false)
@@ -37,8 +37,8 @@ export const BackToPageTopButton: React.VFC<Props> = ({
     <button
       className={
         isButtonActive
-          ? 'back-to-page-top-button'
-          : 'back-to-page-top-button__none'
+          ? 'global-back-to-page-top-button'
+          : 'global-back-to-page-top-button__none'
       }
       onClick={returnTop}
     >
@@ -47,4 +47,4 @@ export const BackToPageTopButton: React.VFC<Props> = ({
   )
 }
 
-export default BackToPageTopButton
+export default GlobalBackToPageTopButton
