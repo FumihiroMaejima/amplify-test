@@ -13,6 +13,7 @@ import { AppRouter } from '@/AppRouter'
 import { GlobalFooter } from '@/components/_global/GlobalFooter'
 // import { GlobalHeader } from '@/components/_global/GlobalHeader'
 import { AuthGlobalHeader } from '@/components/_global/AuthGlobalHeader'
+import { GlobalBackToPageTopButton } from '@/components/_global/GlobalBackToPageTopButton'
 
 import { queryApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
@@ -47,6 +48,7 @@ function App() {
       {({ signOut, user }) => (
         <div className="app">
           {/* <GlobalHeader /> */}
+          <GlobalBackToPageTopButton />
           <AuthGlobalHeader signOut={signOut} />
           <div className="app-content">
             <AppRouter />
