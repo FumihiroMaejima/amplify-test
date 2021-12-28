@@ -73,6 +73,17 @@ export const Graph: React.VFC = () => {
       },
     }).then((res) => {
       console.log('create todo is: ' + `${res ? 'success' : 'failed'}`)
+
+      // 新規作成後に再検索
+      if (res) {
+        getInitialData().then((data) => {
+          setTodo(data)
+
+          // フォームデータの初期化
+          setName('')
+          setDescription('')
+        })
+      }
     })
   }
 
@@ -109,7 +120,7 @@ export const Graph: React.VFC = () => {
             value={todoNameValue}
             onInput={(e) => setName(e.currentTarget.value)}
             placeholder="input new todo name."
-            maxLength={10}
+            maxLength={25}
           />
         </div>
         <div className="m-y4 d-flex flex-align-center">
