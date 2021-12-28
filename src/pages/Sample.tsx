@@ -8,6 +8,7 @@ import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsCircleButton } from '@/components/parts/button/PartsCircleButton'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
+import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextField'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsSimpleList } from '@/components/parts/list/PartsSimpleList'
@@ -38,6 +39,8 @@ const simpleTableData: SimpleTableDataType[] = [
 ]
 
 export const Sample: React.VFC = () => {
+  const [textValue, setTextValue] = useState('')
+
   return (
     <div className="page-container page-container__mx-auto">
       <h1 className="page-header">Sample</h1>
@@ -93,6 +96,58 @@ export const Sample: React.VFC = () => {
         <PartsCircleButton text="red" color="red" />
         <PartsCircleButton text="green" color="green" />
         <PartsCircleButton text="white" color="white" />
+      </div>
+
+      <div className="m-xy2">
+        {/* <PartsSimpleTextField value={textValue} onInput={(e) => console.log('input: ' + e.currentTarget.value)} /> */}
+        <PartsSimpleTextField
+          value={textValue}
+          onInput={(e) => setTextValue(e.currentTarget.value)}
+        />
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test placeholder"
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="max length 10 strings"
+            maxLength={10}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test required"
+            required={true}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test readOnly"
+            readOnly={true}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test disabled"
+            disabled={true}
+          />
+        </div>
       </div>
 
       <div className="m-xy2">
