@@ -179,7 +179,19 @@
   display: flex;
 }
 
-.flex-justify-left {
+
+// @each key, value in $map の順
+@each $name, $direction in $layout-directions {
+  .flex-justify-#{$name} {
+    justify-content: $direction;
+  }
+}
+
+/* .flex-justify-left {
+  justify-content: map-get($direction, left);
+} */
+
+/* .flex-justify-left {
   justify-content: left;
 }
 
@@ -189,5 +201,5 @@
 
 .flex-justify-right {
   justify-content: right;
-}
+} */
 
