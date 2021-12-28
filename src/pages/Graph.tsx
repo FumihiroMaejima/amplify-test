@@ -2,6 +2,7 @@ import React, { useState, useEffect, Component } from 'react'
 import { Link } from 'react-router-dom'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
+import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextField'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsStickyNoteList } from '@/components/parts/list/PartsStickyNoteList'
@@ -13,13 +14,6 @@ import {
 import { TableContentsType } from '@/types'
 import { queryApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
-
-const tableData: TableContentsType[] = [
-  { label: '会社名', value: 'テスト株式会社' },
-  { label: '創業', value: '1950年' },
-  { label: '従業員数', value: '600人' },
-  { label: '電話番号', value: '123-456-7890' },
-]
 
 const simpleTableHeaderData: TableHeaderType[] = [
   { label: 'label1' },
@@ -59,6 +53,9 @@ const getInitialData = async (): Promise<TodoListType> => {
 }
 
 export const Graph: React.VFC = () => {
+  // formデータs
+  const [todoNameValue, setName] = useState('')
+  const [todoDescriptionValue, setDescription] = useState('')
   const [todos, setTodo] = useState<TodoListType>([])
 
   // mount後に実行する処理
@@ -80,9 +77,9 @@ export const Graph: React.VFC = () => {
         isDashed={false}
         isDouble={false}
       />
-      {todos.map((todo: TodoType, i) => (
+      {/* {todos.map((todo: TodoType, i) => (
         <p key={i}>{todo.name}</p>
-      ))}
+      ))} */}
 
       <div className="m-xy2">
         <PartsTitleBox text="title box" isDashed={false} />
@@ -97,7 +94,28 @@ export const Graph: React.VFC = () => {
         <PartsSimpleButton text="white" color="white" />
       </div>
 
-      <PartsLabelHeading text="ヘッダー" />
+      <PartsLabelHeading text="Create ToDo Form" />
+      <div className="m-xy4 parts-simple-box util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p">
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={todoNameValue}
+            onInput={(e) => setName(e.currentTarget.value)}
+            placeholder="input new todo name."
+            maxLength={10}
+          />
+        </div>
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={todoDescriptionValue}
+            onInput={(e) => setDescription(e.currentTarget.value)}
+            placeholder="input new todo description."
+            maxLength={10}
+          />
+        </div>
+        <PartsSimpleButton text="create todo" color="green" />
+      </div>
+
+      <PartsLabelHeading text="ToDos" />
 
       <div className="m-xy2">
         <PartsSimpleTable headers={todoTableHeaderData} items={todos} />
