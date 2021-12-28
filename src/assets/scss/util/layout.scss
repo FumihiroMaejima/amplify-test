@@ -187,6 +187,13 @@
   }
 }
 
+@each $name, $direction in $layout-align-directions {
+  .flex-align-#{$name} {
+    // align-content: $direction;
+    align-items: $direction;
+  }
+}
+
 /* .flex-justify-left {
   justify-content: map-get($direction, left);
 } */
