@@ -15,7 +15,7 @@ const todoId = 1
  * graphql query api
  * @param {unknown} query
  * @param {{} | undefined} variables
- * @return {Promise<void>}
+ * @return {Promise<T | undefined>}
  */
 export const queryApi = async <T = Record<string, unknown>>(
   query: unknown,
@@ -76,16 +76,30 @@ export const queryApi = async <T = Record<string, unknown>>(
  * graphql create api
  * @param {unknown} query
  * @param {{} | undefined} variables
- * @return {Promise<void>}
+ * @return {Promise<boolean>}
  */
-export const createApi = async (
+export const createApi = async <T = Record<string, unknown>>(
   query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
-): Promise<void> => {
+): Promise<boolean> => {
   // create
   // await API.graphql(graphqlOperation(createTodo, { input: todo }))
-  await API.graphql(graphqlOperation(query, variables))
+  // await API.graphql(graphqlOperation(query, variables))
+
+  try {
+    const response = (await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
+
+    console.log('create response: ' + JSON.stringify(response, null, 2))
+    // return (await response).data
+    return true
+  } catch (error: unknown) {
+    console.log('create api error: ' + JSON.stringify(error, null, 2))
+    // throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+    return false
+  }
 }
 
 /**

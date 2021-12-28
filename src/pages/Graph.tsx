@@ -12,7 +12,8 @@ import {
   SimpleTableDataType,
 } from '@/components/parts/table/PartsSimpleTable'
 import { TableContentsType } from '@/types'
-import { queryApi } from '@/graphql/utils'
+import { createTodo } from '@/graphql/mutations'
+import { queryApi, createApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
 
 const simpleTableHeaderData: TableHeaderType[] = [
@@ -69,6 +70,25 @@ export const Graph: React.VFC = () => {
   }
   useEffect(onDidMount, [])
 
+  /**
+   * create todo request handler
+   * @param {React.MouseEvent<HTMLButtonElement>} event
+   * @return {MouseEventHandler<HTMLButtonElement>}
+   */
+  const createToDoRequestHandler: React.MouseEventHandler<HTMLButtonElement> = (
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    createApi(createTodo, {
+      input: {
+        name: todoNameValue,
+        description: todoDescriptionValue,
+      },
+    }).then((res) => {
+      console.log('create todo is: ' + `${res ? 'success' : 'failed'}`)
+    })
+  }
+
   return (
     <div className="page-container page-container__mx-auto">
       <PartsSimpleHeading
@@ -117,6 +137,7 @@ export const Graph: React.VFC = () => {
             text="create todo"
             color="green"
             disabled={todoNameValue === '' || todoDescriptionValue === ''}
+            onClick={createToDoRequestHandler}
           />
         </div>
       </div>
