@@ -96,7 +96,7 @@ export const Graph: React.VFC = () => {
 
       <PartsLabelHeading text="Create ToDo Form" />
       <div className="m-xy4 parts-simple-box util-border-full-solid-2p__color--dark-grey util-border-radius__round--5p">
-        <div className="m-y2">
+        <div className="m-y4">
           <PartsSimpleTextField
             value={todoNameValue}
             onInput={(e) => setName(e.currentTarget.value)}
@@ -104,16 +104,20 @@ export const Graph: React.VFC = () => {
             maxLength={10}
           />
         </div>
-        <div className="m-y2">
+        <div className="m-y4">
           <PartsSimpleTextField
             value={todoDescriptionValue}
             onInput={(e) => setDescription(e.currentTarget.value)}
             placeholder="input new todo description."
-            maxLength={10}
+            maxLength={100}
           />
         </div>
         <div className="d-flex flex-justify-right m-r2">
-          <PartsSimpleButton text="create todo" color="green" />
+          <PartsSimpleButton
+            text="create todo"
+            color="green"
+            disabled={todoNameValue === '' || todoDescriptionValue === ''}
+          />
         </div>
       </div>
 
