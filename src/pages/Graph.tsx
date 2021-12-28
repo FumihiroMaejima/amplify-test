@@ -1,31 +1,18 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextField'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
-import { PartsStickyNoteList } from '@/components/parts/list/PartsStickyNoteList'
 import {
   PartsSimpleTable,
   TableHeaderType,
   SimpleTableDataType,
 } from '@/components/parts/table/PartsSimpleTable'
-import { TableContentsType } from '@/types'
 import { createTodo } from '@/graphql/mutations'
 import { queryApi, createApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
-
-const simpleTableHeaderData: TableHeaderType[] = [
-  { label: 'label1' },
-  { label: 'label2' },
-  { label: 'label3' },
-]
-const simpleTableData: SimpleTableDataType[] = [
-  { label1: 'v1', label2: 'v2', label3: 'v3' },
-  { label1: 'v4', label2: 'v5', label3: 'v6' },
-  { label1: 'v7', label2: 'v8', label3: 'v9' },
-]
 
 const todoTableHeaderData: TableHeaderType[] = [
   { label: 'id' },
@@ -150,12 +137,6 @@ export const Graph: React.VFC = () => {
         <PartsSimpleTable headers={todoTableHeaderData} items={todos} />
       </div>
 
-      <div className="m-xy2">
-        <PartsSimpleTable
-          headers={simpleTableHeaderData}
-          items={simpleTableData}
-        />
-      </div>
       <div className="m-y2">
         <Link to={`/`}>Go To Home</Link>
       </div>
