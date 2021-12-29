@@ -145,7 +145,13 @@ export const Graph: React.VFC = () => {
       <PartsLabelHeading text="ToDos" />
 
       <div className="m-xy2">
-        <PartsSimpleEditTable headers={todoTableHeaderData} items={todos} />
+        <PartsSimpleEditTable
+          headers={todoTableHeaderData}
+          items={todos}
+          editable={true}
+          editableKeys={['name', 'description']}
+          onInput={(e) => console.log('form edit:', e.currentTarget.value)}
+        />
       </div>
 
       <div className="m-y2">
