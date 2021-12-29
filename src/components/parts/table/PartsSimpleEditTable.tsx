@@ -13,6 +13,10 @@ type Props = {
   editableKeys?: string[]
   onInput?: FormEventHandler<HTMLInputElement>
   onChange?: ChangeEventHandler<HTMLInputElement>
+  maxLength?: number
+  required?: boolean
+  disabled?: boolean
+  readOnly?: boolean
 }
 
 export const PartsSimpleEditTable: React.VFC<Props> = ({
@@ -22,6 +26,10 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
   editableKeys = [],
   onInput = undefined,
   onChange = undefined,
+  maxLength = undefined,
+  required = undefined,
+  disabled = false,
+  readOnly = false,
 }) => {
   return (
     <table className="parts-simple-edit-table parts-simple-edit-table__table-element">
@@ -44,6 +52,10 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
                     value={item[key] as string}
                     onInput={onInput}
                     onChange={onChange}
+                    maxLength={maxLength}
+                    required={required}
+                    disabled={disabled}
+                    readOnly={readOnly}
                   />
                 ) : (
                   item[key]
