@@ -8,6 +8,7 @@ import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsCircleButton } from '@/components/parts/button/PartsCircleButton'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
+import { PartsSimpleSelectBox } from '@/components/parts/form/PartsSimpleSelectBox'
 import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextField'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
@@ -38,8 +39,20 @@ const simpleTableData: SimpleTableDataType[] = [
   { label1: 'v7', label2: 'v8', label3: 'v9' },
 ]
 
+const selectBoxItems = [
+  { text: 'test1', value: 1 },
+  { text: 'test2', value: 2 },
+  { text: 'test3', value: 3 },
+  { text: 'test4', value: 4 },
+  { text: 'test5', value: 5 },
+  { text: 'test6', value: 6 },
+  { text: 'test7', value: 7 },
+  { text: 'test8', value: 8 },
+]
+
 export const Sample: React.VFC = () => {
   const [textValue, setTextValue] = useState('')
+  const [selectValue, setSelectValue] = useState<undefined | number>(undefined)
 
   return (
     <div className="page-container page-container__mx-auto">
@@ -148,6 +161,16 @@ export const Sample: React.VFC = () => {
             disabled={true}
           />
         </div>
+      </div>
+
+      <div className="m-xy2">
+        <PartsSimpleSelectBox
+          value={selectValue}
+          onChange={(e) => setSelectValue(parseInt(e.target.value))}
+          items={selectBoxItems}
+          placeholder="test selectbox"
+          disabled={false}
+        />
       </div>
 
       <div className="m-xy2">
