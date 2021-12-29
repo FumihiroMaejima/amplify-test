@@ -6,10 +6,10 @@ import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextFie
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import {
-  PartsSimpleTable,
+  PartsSimpleEditTable,
   TableHeaderType,
   SimpleTableDataType,
-} from '@/components/parts/table/PartsSimpleTable'
+} from '@/components/parts/table/PartsSimpleEditTable'
 import { createTodo } from '@/graphql/mutations'
 import { queryApi, createApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
@@ -145,7 +145,7 @@ export const Graph: React.VFC = () => {
       <PartsLabelHeading text="ToDos" />
 
       <div className="m-xy2">
-        <PartsSimpleTable headers={todoTableHeaderData} items={todos} />
+        <PartsSimpleEditTable headers={todoTableHeaderData} items={todos} />
       </div>
 
       <div className="m-y2">
