@@ -7,6 +7,7 @@ type Props = {
   items?: Record<string, string | number | string[] | undefined>[]
   itemText?: string
   itemValue?: string
+  multiple?: boolean
   placeholder?: string
   required?: boolean
   disabled?: boolean
@@ -19,6 +20,7 @@ export const PartsSimpleSelectBox: React.VFC<Props> = ({
   items = [],
   itemText = 'text',
   itemValue = 'value',
+  multiple = false,
   placeholder = undefined,
   required = undefined,
   disabled = false,
@@ -29,6 +31,7 @@ export const PartsSimpleSelectBox: React.VFC<Props> = ({
       value={value}
       onInput={onInput}
       onChange={onChange}
+      multiple={multiple}
       placeholder={placeholder}
       required={required}
       disabled={disabled}

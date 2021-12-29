@@ -53,6 +53,7 @@ const selectBoxItems = [
 export const Sample: React.VFC = () => {
   const [textValue, setTextValue] = useState('')
   const [selectValue, setSelectValue] = useState<undefined | number>(undefined)
+  // const [multiSelectValue, setMultiSelectValue] = useState<number[]>([])
 
   return (
     <div className="page-container page-container__mx-auto">
@@ -164,13 +165,16 @@ export const Sample: React.VFC = () => {
       </div>
 
       <div className="m-xy2">
-        <PartsSimpleSelectBox
-          value={selectValue}
-          onChange={(e) => setSelectValue(parseInt(e.target.value))}
-          items={selectBoxItems}
-          placeholder="test selectbox"
-          disabled={false}
-        />
+        <div className="m-xy2">
+          <PartsSimpleSelectBox
+            value={selectValue}
+            onChange={(e) => setSelectValue(parseInt(e.target.value))}
+            items={selectBoxItems}
+            placeholder="test selectbox"
+            disabled={false}
+          />
+        </div>
+        <div className="m-xy2"></div>
       </div>
 
       <div className="m-xy2">
