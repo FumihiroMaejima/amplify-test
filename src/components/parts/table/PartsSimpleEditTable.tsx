@@ -11,7 +11,9 @@ type Props = {
   items: SimpleTableDataType[]
   editable?: boolean
   editableKeys?: string[]
-  onInput?: FormEventHandler<HTMLInputElement>
+  // onInput?: FormEventHandler<HTMLInputElement>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onInput?: <T = string>(i: number, k: string, v: T) => void
   onChange?: ChangeEventHandler<HTMLInputElement>
   maxLength?: number
   required?: boolean
@@ -51,7 +53,12 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
                     className="parts-simple-edit-table__text-field"
                     type="text"
                     value={item[key] as string}
-                    onInput={onInput}
+                    // onInput={onInput}
+                    onInput={(e) => {
+                      if (onInput !== undefined) {
+                        onInput(j, key, e.currentTarget.value)
+                      }
+                    }}
                     onChange={onChange}
                     maxLength={maxLength}
                     required={required}
