@@ -15,6 +15,8 @@ type Props = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onInput?: <T = string>(i: number, k: string, v: T) => void
   onChange?: ChangeEventHandler<HTMLInputElement>
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onClickUpdate?: (i: number) => void
   maxLength?: number
   required?: boolean
   disabled?: boolean
@@ -28,6 +30,7 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
   editableKeys = [],
   onInput = undefined,
   onChange = undefined,
+  onClickUpdate = undefined,
   maxLength = undefined,
   required = undefined,
   disabled = false,
@@ -72,7 +75,14 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
             ))}
             {editable && (
               <td>
-                <button className="parts-simple-button parts-simple-button__color--green util-color__text--white">
+                <button
+                  className="parts-simple-button parts-simple-button__color--green util-color__text--white"
+                  onClick={() => {
+                    if (onClickUpdate !== undefined) {
+                      onClickUpdate(j)
+                    }
+                  }}
+                >
                   update
                 </button>
               </td>

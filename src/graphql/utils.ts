@@ -106,20 +106,34 @@ export const createApi = async <T = Record<string, unknown>>(
  * graphql update api
  * @param {unknown} query
  * @param {{} | undefined} variables
- * @return {Promise<void>}
+ * @return {Promise<boolean>}
  */
-export const updateApi = async (
+export const updateApi = async <T = Record<string, unknown>>(
   query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
-): Promise<void> => {
+): Promise<boolean> => {
   // update
   /* await API.graphql(
     graphqlOperation(updateTodo, {
       input: { id: todoId, name: 'Updated todo info' },
     })
   ) */
-  await API.graphql(graphqlOperation(query, variables))
+  // await API.graphql(graphqlOperation(query, variables))
+
+  try {
+    const response = (await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
+
+    console.log('update response: ' + JSON.stringify(response, null, 2))
+    // return (await response).data
+    return true
+  } catch (error: unknown) {
+    console.log('update api error: ' + JSON.stringify(error, null, 2))
+    // throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+    return false
+  }
 }
 
 /**

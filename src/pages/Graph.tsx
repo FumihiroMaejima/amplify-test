@@ -10,8 +10,8 @@ import {
   TableHeaderType,
   SimpleTableDataType,
 } from '@/components/parts/table/PartsSimpleEditTable'
-import { createTodo } from '@/graphql/mutations'
-import { queryApi, createApi } from '@/graphql/utils'
+import { createTodo, updateTodo } from '@/graphql/mutations'
+import { queryApi, createApi, updateApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
 
 const todoTableHeaderData: TableHeaderType[] = [
@@ -113,6 +113,31 @@ export const Graph: React.VFC = () => {
     )
   }
 
+  /**
+   * update todo request handler
+   * @param {number} index
+   * @return {void}
+   */
+  const updateToDoRequestHandler = (index: number): void => {
+    const target = todos[index]
+    updateApi(updateTodo, {
+      input: {
+        id: target.id,
+        name: target.name,
+        description: target.description,
+      },
+    }).then((res) => {
+      console.log('update todo is: ' + `${res ? 'success' : 'failed'}`)
+
+      // 更新後に再検索
+      if (res) {
+        getInitialData().then((data) => {
+          setTodo([...data])
+        })
+      }
+    })
+  }
+
   return (
     <div className="page-container page-container__mx-auto">
       <PartsSimpleHeading
@@ -176,7 +201,6 @@ export const Graph: React.VFC = () => {
           items={todos}
           editable={true}
           editableKeys={['name', 'description']}
-          // onInput={(e) => console.log('form edit:', e.currentTarget.value)}
           onInput={(index, key, value) => {
             /* console.log('form edit1 index:', index)
             console.log('form edit2 key:', key)
@@ -187,6 +211,7 @@ export const Graph: React.VFC = () => {
               value as unknown as string
             )
           }}
+          onClickUpdate={updateToDoRequestHandler}
         />
       </div>
 
