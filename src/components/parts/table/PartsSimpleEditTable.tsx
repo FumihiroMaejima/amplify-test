@@ -17,6 +17,7 @@ type Props = {
   onChange?: ChangeEventHandler<HTMLInputElement>
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClickUpdate?: (i: number) => void
+  onClickDelete?: (i: number) => void
   maxLength?: number
   required?: boolean
   disabled?: boolean
@@ -31,6 +32,7 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
   onInput = undefined,
   onChange = undefined,
   onClickUpdate = undefined,
+  onClickDelete = undefined,
   maxLength = undefined,
   required = undefined,
   disabled = false,
@@ -84,6 +86,16 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
                   }}
                 >
                   update
+                </button>
+                <button
+                  className="parts-simple-button parts-simple-button__color--red util-color__text--white"
+                  onClick={() => {
+                    if (onClickDelete !== undefined) {
+                      onClickDelete(j)
+                    }
+                  }}
+                >
+                  delete
                 </button>
               </td>
             )}

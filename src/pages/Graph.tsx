@@ -10,8 +10,8 @@ import {
   TableHeaderType,
   SimpleTableDataType,
 } from '@/components/parts/table/PartsSimpleEditTable'
-import { createTodo, updateTodo } from '@/graphql/mutations'
-import { queryApi, createApi, updateApi } from '@/graphql/utils'
+import { createTodo, updateTodo, deleteTodo } from '@/graphql/mutations'
+import { queryApi, createApi, updateApi, deleteApi } from '@/graphql/utils'
 import { listTodos } from '@/graphql/queries'
 
 const todoTableHeaderData: TableHeaderType[] = [
@@ -138,6 +138,28 @@ export const Graph: React.VFC = () => {
     })
   }
 
+  /**
+   * delete todo request handler
+   * @param {number} index
+   * @return {void}
+   */
+  const deleteToDoRequestHandler = (index: number): void => {
+    deleteApi(deleteTodo, {
+      input: {
+        id: todos[index].id,
+      },
+    }).then((res) => {
+      console.log('delete todo is: ' + `${res ? 'success' : 'failed'}`)
+
+      // 削除後に再検索
+      if (res) {
+        getInitialData().then((data) => {
+          setTodo([...data])
+        })
+      }
+    })
+  }
+
   return (
     <div className="page-container page-container__mx-auto">
       <PartsSimpleHeading
@@ -212,6 +234,7 @@ export const Graph: React.VFC = () => {
             )
           }}
           onClickUpdate={updateToDoRequestHandler}
+          onClickDelete={deleteToDoRequestHandler}
         />
       </div>
 

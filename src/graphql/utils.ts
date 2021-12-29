@@ -140,16 +140,30 @@ export const updateApi = async <T = Record<string, unknown>>(
  * graphql delete api
  * @param {unknown} query
  * @param {{} | undefined} variables
- * @return {Promise<void>}
+ * @return {Promise<boolean>}
  */
-export const deleteApi = async (
+export const deleteApi = async <T = Record<string, unknown>>(
   query: unknown,
   // eslint-disable-next-line
   variables?: {} | undefined
-): Promise<void> => {
+): Promise<boolean> => {
   // delete
   // await API.graphql(graphqlOperation(deleteTodo, { input: { id: todoId } }))
-  await API.graphql(graphqlOperation(query, variables))
+  // await API.graphql(graphqlOperation(query, variables))
+
+  try {
+    const response = (await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
+
+    console.log('delete response: ' + JSON.stringify(response, null, 2))
+    // return (await response).data
+    return true
+  } catch (error: unknown) {
+    console.log('delete api error: ' + JSON.stringify(error, null, 2))
+    // throw new Error('query api error: ' + JSON.stringify(error, null, 2))
+    return false
+  }
 }
 
 /**
