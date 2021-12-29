@@ -36,7 +36,8 @@ const getInitialData = async (): Promise<TodoListType> => {
   const queryData = await queryApi<
     Record<'listTodos', Record<'items', TodoListType>>
   >(listTodos)
-  console.log('queryData: ' + JSON.stringify(queryData, null, 2))
+  // TODO remove
+  // console.log('queryData: ' + JSON.stringify(queryData, null, 2))
   return queryData?.listTodos.items || []
 }
 
@@ -85,6 +86,31 @@ export const Graph: React.VFC = () => {
         })
       }
     })
+  }
+
+  /**
+   * edit todo data handler
+   * @param {number} index
+   * @param {Extract<keyof TodoType, 'name' | 'description'>} key
+   * @param {string} value
+   * @return {void}
+   */
+  const editToDoHandler = (
+    index: number,
+    key: Extract<keyof TodoType, 'name' | 'description'>,
+    value: string
+  ): void => {
+    // TODO remove
+    // 追加になる。
+    // setTodo([...todos, { ...todos[index], ...{ [key]: value } }])
+    setTodo(
+      todos.map((todo, i) => {
+        if (i === index) {
+          todo[key] = value
+        }
+        return todo
+      })
+    )
   }
 
   return (
@@ -150,7 +176,17 @@ export const Graph: React.VFC = () => {
           items={todos}
           editable={true}
           editableKeys={['name', 'description']}
-          onInput={(e) => console.log('form edit:', e.currentTarget.value)}
+          // onInput={(e) => console.log('form edit:', e.currentTarget.value)}
+          onInput={(index, key, value) => {
+            /* console.log('form edit1 index:', index)
+            console.log('form edit2 key:', key)
+            console.log('form edit3 value:', value) */
+            editToDoHandler(
+              index,
+              key as Extract<keyof TodoType, 'name' | 'description'>,
+              value as unknown as string
+            )
+          }}
         />
       </div>
 
