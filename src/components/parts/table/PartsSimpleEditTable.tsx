@@ -38,6 +38,7 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
           {headers.map((header, i) => (
             <th key={i}>{header.label}</th>
           ))}
+          {editable && <th>更新</th>}
         </tr>
       </thead>
       <tbody>
@@ -62,6 +63,13 @@ export const PartsSimpleEditTable: React.VFC<Props> = ({
                 )}
               </td>
             ))}
+            {editable && (
+              <td>
+                <button className="parts-simple-button parts-simple-button__color--green util-color__text--white">
+                  update
+                </button>
+              </td>
+            )}
           </tr>
         ))}
       </tbody>
