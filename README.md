@@ -1476,6 +1476,17 @@ cloud上ではAppSyncとDynamoDBに当プロジェクトの設定が追加され
 yarn add @aws-amplify/api @aws-amplify/api-graphql
 ```
 
+→最終的に必要無かった。(型定義の取得で`@aws-amplify/api-graphql`が必要かもしれない。)
+
+
+基本的に自動的に生成される。API.tsを使って`API.graphql(graphqlOperation(query, variables))`でgraphqlにapiリクエストを実行することになるが、`subscription`の時はレスポンスの型が異なる為、注意が必要。
+
+```TypeScript
+(await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
+```
+
 ---
 
 ## 初回publishした段階の状態
