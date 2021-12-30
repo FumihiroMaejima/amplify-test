@@ -175,3 +175,38 @@
   padding: 24px 24px 24px 24px;
 }
 
+.d-flex {
+  display: flex;
+}
+
+
+// @each key, value in $map の順
+@each $name, $direction in $layout-directions {
+  .flex-justify-#{$name} {
+    justify-content: $direction;
+  }
+}
+
+@each $name, $direction in $layout-align-directions {
+  .flex-align-#{$name} {
+    // align-content: $direction;
+    align-items: $direction;
+  }
+}
+
+/* .flex-justify-left {
+  justify-content: map-get($direction, left);
+} */
+
+/* .flex-justify-left {
+  justify-content: left;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-right {
+  justify-content: right;
+} */
+

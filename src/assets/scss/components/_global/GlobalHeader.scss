@@ -35,6 +35,12 @@
     }
   }
 
+  &__blok-button-left {
+    @include max-screen($header-change-breakpont) {
+      display: none;
+    }
+  }
+
   &__blok-button {
     display: flex;
     align-items: center;

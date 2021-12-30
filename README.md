@@ -1031,10 +1031,10 @@ $ yarn add aws-amplify aws-amplify-react
 ```TypeScript
 import React, { useState } from 'react'
 import Amplify from 'aws-amplify'
-import awsmobile from '@/aws-exports'
+import awsConfig from '@/aws-exports'
 
 // Amplifyの設定を行う
-Amplify.configure(awsmobile)
+Amplify.configure(awsConfig)
 ```
 
 
@@ -1167,6 +1167,317 @@ Hosting endpointにアクセスするとビルドしたファイルにアクセ�
 
 ---
 
+## 認証機能の追加
+
+下記のコマンドでローカルに認証機能を追加する。
+
+認証方法ははユーザー名、電話番号、emailなどから選択出来る。
+
+```Shell-session
+$ amplify add auth
+
+Using service: Cognito, provided by: awscloudformation
+
+ The current configured provider is Amazon Cognito.
+
+ Do you want to use the default authentication and security configurati
+on? Default configuration
+ Warning: you will not be able to edit these selections.
+ How do you want users to be able to sign in? Username
+ Do you want to configure advanced settings? No, I am done.
+✅ Successfully added auth resource ${resouce_name} locally
+
+✅ Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+```
+
+認証機能をcloudに追加(push)する。
+
+```Shell-session
+$ amplify push
+⠦ Fetching updates to backend environment: dev from the cloud.⠋ Buildin✔ Successfully pulled backend environment dev from the cloud.
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ resource_name       │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+? Are you sure you want to continue? Yes
+⠴ Updating resources in the cloud. This may take a few minutes...
+
+UPDATE_IN_PROGRESS ${project_name} AWS::CloudFormation::Stack Thu Dec 16 2021 00:22:50 GMT+0900 (日本標準時) User Initiated
+⠋ Updating resources in the cloud. This may take a few minutes...
+
+```
+
+push後はcloudのS3などの各サービスが更新されている。
+また、下記のサービスに設定が新規追加されている
+
+`Lambda`: 関数が2つ追加されている。
+
+`Cognite`: ユーザープール、IDプールが作成される。
+
+
+statusは下記の通りに変わる。
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ resource_name       │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+```
+
+`aws-amplify-react`を追加する。(`aws-amplify`をインストールしていない場合は一緒にインストールする。)
+
+認証関連を扱わない場合は`aws-amplify`のみで良い。
+
+```Shell-session
+$ yarn add aws-amplify aws-amplify-react
+```
+
+2021年12月現在、`aws-amplify-react`はregacy扱いになっている...。
+
+新規の`@aws-amplify/ui-react`を代わりに使う。
+
+[Amplify Docs](https://docs.amplify.aws/ui/q/framework/react/)
+
+[Amplify UI](https://ui.docs.amplify.aws/)
+
+[aws-amplify/amplify-ui](https://github.com/aws-amplify/amplify-ui)
+
+
+yarn addして使おうとしたが、cssの読み込みが上手く行かなかった。
+
+`@aws-amplify/ui-react`は親の`@aws-amplify/ui`を参照しているのでこちらもインストールする必要がある。(viteだけ？)
+
+```Shell-session
+$ yarn add @aws-amplify/ui
+```
+
+結局下記の３つをインストールすることになる。
+
+```Shell-session
+$ yarn add aws-amplify @aws-amplify/ui-react @aws-amplify/ui
+```
+
+
+### App.tsxに設定の追加
+
+最小限の設定としては下記の様な形
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsConfig from '@/aws-exports'
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
+// Amplifyの設定を行う
+Amplify.configure(awsConfig)
+
+function App() {
+  return (
+    <Authenticator>
+      {({ signOut, user }) => (
+        <div className="app">
+          <!-- main contents -->
+        </div>
+      )}
+    </Authenticator>
+  )
+}
+```
+
+
+---
+
+### デフォルトの機能の修正
+
+- 日本語設定
+- sign out機能ハンドラー設定
+- sign up機能の非表示化
+- password reset機能の非表示化
+
+最小限の設定としては下記の様な形
+
+```TypeScript
+import React, { useState } from 'react'
+import Amplify from 'aws-amplify'
+import awsConfig from '@/aws-exports'
+import { Authenticator, View } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
+
+// 日本語化対応
+import { translations } from '@aws-amplify/ui'
+I18n.putVocabularies(translations)
+I18n.setLanguage('ja')
+
+import { AppRouter } from '@/AppRouter'
+import { GlobalFooter } from '@/components/_global/GlobalFooter'
+import { AuthGlobalHeader } from '@/components/_global/AuthGlobalHeader'
+
+// Amplifyの設定を行う
+Amplify.configure(awsConfig)
+
+function App() {
+  // 認証フォームコンポーネントの拡張設定
+  const components = {
+    // パスワードリセットフォームでの入力を防ぐ
+    SignIn: {
+      Footer() {
+        return <View textAlign="center">*パスワードリセットは出来ません。</View>
+      },
+    },
+    // sign up コンポーネントのフォームを設定しない事で入力を防ぐ
+    SignUp: {
+      FormFields() {
+        return <View textAlign="center"></View>
+      },
+    },
+  }
+
+  return (
+    <Authenticator variation="modal" components={components}>
+      {({ signOut, user }) => (
+        <div className="app">
+          <AuthGlobalHeader signOut={signOut} />
+          <div>
+            <!-- main contents -->
+          </div>
+        </div>
+      )}
+    </Authenticator>
+  )
+}
+
+export default App
+
+```
+
+signIn & signUpのタブを非表示にする為に下記のCSS設定を追加する。
+
+```scss
+.amplify-tabs {
+  display: none !important;
+}
+```
+
+---
+
+## APIの追加
+
+```Shell-session
+$ amplify add api
+
+? Select from one of the below mentioned services: GraphQL
+? Here is the GraphQL API that we will create. Select a setting to edit
+ or continue Continue
+? Choose a schema template: Single object with fields (e.g., “Todo” wit
+h ID, name, description)
+
+The following types do not have '@auth' enabled. Consider using @auth with @model
+         - Todo
+Learn more about @auth here: https://docs.amplify.aws/cli-legacy/graphql-transformer/auth
+
+GraphQL schema compiled successfully.
+
+Edit your schema at /path/project/amplify/backend/api/amplifytest/schema.graphql or place .graphql files in a directory at /path/project/amplify/backend/api/amplifytest/schema
+✔ Do you want to edit the schema now? (Y/n) · no
+✅ Successfully added resource ${project_name} locally
+
+✅ Some next steps:
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+```
+
+statusの確認
+
+```Shell-session
+$ amplify status
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Api      │ project_name        │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ project_name_id     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+
+Hosting endpoint: https://xxxxxxxxxx.cloudfront.net
+
+```
+
+### backendのpush
+
+
+```Shell-session
+$ amplify push
+⠦ Fetching updates to backend environment: dev from the cloud.⠋ Buildin⠙ Building resource api/project_name
+
+    Current Environment: dev
+
+┌──────────┬─────────────────────┬───────────┬───────────────────┐
+│ Category │ Resource name       │ Operation │ Provider plugin   │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Api      │ project_name        │ Create    │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Hosting  │ S3AndCloudFront     │ No Change │ awscloudformation │
+├──────────┼─────────────────────┼───────────┼───────────────────┤
+│ Auth     │ project_name_id     │ No Change │ awscloudformation │
+└──────────┴─────────────────────┴───────────┴───────────────────┘
+? Are you sure you want to continue? Yes
+? Do you want to generate code for your newly created GraphQL API Yes
+? Choose the code generation language target typescript
+? Enter the file name pattern of graphql queries, mutations and subscri
+ptions src/graphql/**/*.ts
+? Do you want to generate/update all possible GraphQL operations - quer
+ies, mutations and subscriptions Yes
+? Enter maximum statement depth [increase from default if your schema i
+s deeply nested] 2
+? Enter the file name for the generated code src/API.ts
+⠼ Updating resources in the cloud. This may take a few minutes...
+
+
+GraphQL endpoint: https://xxxxxxxxx.appsync-api.ap-northeast-1.amazonaws.com/graphql
+GraphQL API KEY: xxxxxxxxxxxxxxx
+
+```
+
+cloud上ではAppSyncとDynamoDBに当プロジェクトの設定が追加される。
+
+ちなみ、`amplify push`をしただけではフロントエンドの設定(新規追加した認証機能など)は最新に更新されない。
+
+`amplify publish`をしないとビルドされないっぽい。
+
+
+---
+
+## backendにリクエスト送る。
+
+
+```Shell-session
+yarn add @aws-amplify/api @aws-amplify/api-graphql
+```
+
+---
+
 ## 初回publishした段階の状態
 
 1. `amplify/backend`ディレクトリに`hosting/S3AndCloudFront`ディレクトリが作成される。
@@ -1227,6 +1538,7 @@ Run 'amplify pull' to sync future upstream changes.
 3. `amplify publish`で静的リソースを`S3/CloudFront`にデプロイする。
 4. `amplify delete`でinitで作成した環境を全て削除。
 5. `amplify pull`で最新の状態の更新。
+6. `amplify console`でブラウザのaws コンソール画面を開く(Amplify Studioも選べる)。
 
 
 ```Shell-session

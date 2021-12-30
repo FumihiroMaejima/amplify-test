@@ -8,6 +8,8 @@ import { PartsTitleBox } from '@/components/parts/box/PartsTitleBox'
 import { PartsCircleButton } from '@/components/parts/button/PartsCircleButton'
 import { PartsSimpleButton } from '@/components/parts/button/PartsSimpleButton'
 import { PartsSimpleFlatButton } from '@/components/parts/button/PartsSimpleFlatButton'
+import { PartsSimpleSelectBox } from '@/components/parts/form/PartsSimpleSelectBox'
+import { PartsSimpleTextField } from '@/components/parts/form/PartsSimpleTextField'
 import { PartsLabelHeading } from '@/components/parts/heading/PartsLabelHeading'
 import { PartsSimpleHeading } from '@/components/parts/heading/PartsSimpleHeading'
 import { PartsSimpleList } from '@/components/parts/list/PartsSimpleList'
@@ -37,7 +39,22 @@ const simpleTableData: SimpleTableDataType[] = [
   { label1: 'v7', label2: 'v8', label3: 'v9' },
 ]
 
+const selectBoxItems = [
+  { text: 'test1', value: 1 },
+  { text: 'test2', value: 2 },
+  { text: 'test3', value: 3 },
+  { text: 'test4', value: 4 },
+  { text: 'test5', value: 5 },
+  { text: 'test6', value: 6 },
+  { text: 'test7', value: 7 },
+  { text: 'test8', value: 8 },
+]
+
 export const Sample: React.VFC = () => {
+  const [textValue, setTextValue] = useState('')
+  const [selectValue, setSelectValue] = useState<undefined | number>(undefined)
+  // const [multiSelectValue, setMultiSelectValue] = useState<number[]>([])
+
   return (
     <div className="page-container page-container__mx-auto">
       <h1 className="page-header">Sample</h1>
@@ -93,6 +110,71 @@ export const Sample: React.VFC = () => {
         <PartsCircleButton text="red" color="red" />
         <PartsCircleButton text="green" color="green" />
         <PartsCircleButton text="white" color="white" />
+      </div>
+
+      <div className="m-xy2">
+        {/* <PartsSimpleTextField value={textValue} onInput={(e) => console.log('input: ' + e.currentTarget.value)} /> */}
+        <PartsSimpleTextField
+          value={textValue}
+          onInput={(e) => setTextValue(e.currentTarget.value)}
+        />
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test placeholder"
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="max length 10 strings"
+            maxLength={10}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test required"
+            required={true}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test readOnly"
+            readOnly={true}
+          />
+        </div>
+
+        <div className="m-xy2">
+          <PartsSimpleTextField
+            value={textValue}
+            onInput={(e) => setTextValue(e.currentTarget.value)}
+            placeholder="test disabled"
+            disabled={true}
+          />
+        </div>
+      </div>
+
+      <div className="m-xy2">
+        <div className="m-xy2">
+          <PartsSimpleSelectBox
+            value={selectValue}
+            onChange={(e) => setSelectValue(parseInt(e.target.value))}
+            items={selectBoxItems}
+            placeholder="test selectbox"
+            disabled={false}
+          />
+        </div>
+        <div className="m-xy2"></div>
       </div>
 
       <div className="m-xy2">

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // pages
 import { About } from '@/pages/About'
+import { Graph } from '@/pages/Graph'
 import { Home } from '@/pages/Home'
 import { Sample } from '@/pages/Sample'
 import { Picsum } from '@/pages/Picsum'
@@ -18,6 +19,7 @@ export const AppRouter = (): JSX.Element => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/graph" component={Graph} />
         <Route exact path="/sample" component={Sample} />
         {isDevelop && <Route exact path="/picsum" component={Picsum} />}
         {isDevelop && <Route exact path="/test1" component={Test1} />}

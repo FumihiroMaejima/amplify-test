@@ -16,6 +16,8 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "@aws-amplify/ui": "^3.0.5",
+    "@aws-amplify/ui-react": "^2.1.5",
     "aws-amplify": "^4.3.4",
     "axios": "^0.23.0",
     "react": "^17.0.0",

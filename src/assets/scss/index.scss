@@ -1,5 +1,6 @@
 /* components */
 // global
+@import './components/_global/GlobalBackToPageTopButton.scss';
 @import './components/_global/GlobalFooter.scss';
 @import './components/_global/GlobalHeader.scss';
 
@@ -14,6 +15,8 @@
 @import './components/parts/button/PartsSimpleButton.scss';
 @import './components/parts/button/PartsSimpleFlatButton.scss';
 @import './components/parts/carousel/PartsSimpleCarousel.scss';
+@import './components/parts/form/PartsSimpleSelectBox.scss';
+@import './components/parts/form/PartsSimpleTextField.scss';
 @import './components/parts/heading/PartsLabelHeading.scss';
 @import './components/parts/heading/PartsSimpleHeading.scss';
 @import './components/parts/list/PartsSimpleList.scss';
@@ -21,6 +24,11 @@
 @import './components/parts//modal/PartsSimpleModal.scss';
 @import './components/parts/table/PartsLabelTable.scss';
 @import './components/parts/table/PartsSimpleTable.scss';
+@import './components/parts/table/PartsSimpleEditTable.scss';
+
+
+/* plugins */
+@import './plugins/amplify.scss';
 
 /* util */
 @import './util/border.scss';
