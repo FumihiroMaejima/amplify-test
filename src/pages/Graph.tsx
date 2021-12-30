@@ -103,6 +103,7 @@ export const Graph: React.VFC = () => {
     // TODO remove
     // 追加になる。
     // setTodo([...todos, { ...todos[index], ...{ [key]: value } }])
+    // setTodo([...todos, { ...todos[index], [key]: value }])
     setTodo(
       todos.map((todo, i) => {
         if (i === index) {
