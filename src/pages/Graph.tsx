@@ -42,9 +42,10 @@ const getInitialData = async (): Promise<TodoListType> => {
 }
 
 export const Graph: React.VFC = () => {
-  // formデータs
-  const [todoNameValue, setName] = useState('')
-  const [todoDescriptionValue, setDescription] = useState('')
+  // formデータ
+  const [createTodoValue, setCreateTodoData] = useState<
+    Record<'name' | 'description', string>
+  >({ name: '', description: '' })
   const [todos, setTodo] = useState<TodoListType>([])
 
   // mount後に実行する処理
@@ -69,8 +70,8 @@ export const Graph: React.VFC = () => {
   ) => {
     createApi(createTodo, {
       input: {
-        name: todoNameValue,
-        description: todoDescriptionValue,
+        name: createTodoValue.name,
+        description: createTodoValue.description,
       },
     }).then((res) => {
       console.log('create todo is: ' + `${res ? 'success' : 'failed'}`)
@@ -81,8 +82,7 @@ export const Graph: React.VFC = () => {
           setTodo(data)
 
           // フォームデータの初期化
-          setName('')
-          setDescription('')
+          setCreateTodoData({ name: '', description: '' })
         })
       }
     })
@@ -190,8 +190,14 @@ export const Graph: React.VFC = () => {
         <div className="m-y4 d-flex flex-align-center">
           <label>name: </label>
           <PartsSimpleTextField
-            value={todoNameValue}
-            onInput={(e) => setName(e.currentTarget.value)}
+            value={createTodoValue.name}
+            onInput={(e) => {
+              setCreateTodoData({
+                ...createTodoValue,
+                name: e.currentTarget.value,
+              })
+              // setName(e.currentTarget.value)
+            }}
             placeholder="input new todo name."
             maxLength={25}
           />
@@ -199,8 +205,13 @@ export const Graph: React.VFC = () => {
         <div className="m-y4 d-flex flex-align-center">
           <label>description: </label>
           <PartsSimpleTextField
-            value={todoDescriptionValue}
-            onInput={(e) => setDescription(e.currentTarget.value)}
+            value={createTodoValue.description}
+            onInput={(e) => {
+              setCreateTodoData({
+                ...createTodoValue,
+                description: e.currentTarget.value,
+              })
+            }}
             placeholder="input new todo description."
             maxLength={100}
           />
@@ -209,7 +220,9 @@ export const Graph: React.VFC = () => {
           <PartsSimpleButton
             text="create todo"
             color="green"
-            disabled={todoNameValue === '' || todoDescriptionValue === ''}
+            disabled={
+              createTodoValue.name === '' || createTodoValue.description === ''
+            }
             onClick={createToDoRequestHandler}
           />
         </div>
