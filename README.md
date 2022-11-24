@@ -743,6 +743,22 @@ aws-cli/1.21.7 Python/3.9.7 Darwin/19.6.0 botocore/1.22.7
 PC再起動後にインストールしたバージョンを反映させる為に、dotfilesの設定を必ずする事。
 
 
+### pipでインストールしたaws-cliのアンインストール
+
+現状、pipでaws-cli@v2をインストール出来ない為、公式からインストーラーをダウンロードしてインストールする。
+
+```Shell-session
+$ pip uninstall awscli
+```
+
+v2に変更後。
+
+```Shell-session
+$ aws --version
+aws-cli/2.4.7 Python/3.8.8 Darwin/21.2.0 exe/x86_64 prompt/off
+```
+
+
 ### .awsの確認
 
 *既にプロファイルが作成済みの場合
@@ -832,6 +848,13 @@ amplifyを使用する場合はamplify用のプロファイルを設定してお
 ```Shell-session
 $ aws iam list-users
 $ aws iam list-groups
+$ aws ec2 describe-vpcs --region ap-northeast-1
+```
+
+### EC2の確認
+
+```Shell-session
+$ aws ec2 describe-vpcs --region ap-northeast-1
 ```
 
 ### S3の確認
@@ -1474,6 +1497,17 @@ cloud上ではAppSyncとDynamoDBに当プロジェクトの設定が追加され
 
 ```Shell-session
 yarn add @aws-amplify/api @aws-amplify/api-graphql
+```
+
+→最終的に必要無かった。(型定義の取得で`@aws-amplify/api-graphql`が必要かもしれない。)
+
+
+基本的に自動的に生成される。API.tsを使って`API.graphql(graphqlOperation(query, variables))`でgraphqlにapiリクエストを実行することになるが、`subscription`の時はレスポンスの型が異なる為、注意が必要。
+
+```TypeScript
+(await API.graphql(
+      graphqlOperation(query, variables)
+    )) as Promise<GraphQLResult<T>>
 ```
 
 ---
